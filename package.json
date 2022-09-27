@@ -1,0 +1,46 @@
+{
+  "name": "@unocss/preset-theme",
+  "version": "0.45.6",
+  "description": "dynamic theme",
+  "author": "Dunqing <dengqing0821@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/Dunqing/unocss-preset-theme#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dunqing/unocss-preset-theme.git",
+    "directory": "packages/preset-theme"
+  },
+  "bugs": {
+    "url": "https://github.com/Dunqing/unocss-preset-theme/issues"
+  },
+  "keywords": [
+    "unocss",
+    "unocss-preset",
+    "unocss-theme"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "*.css"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "stub": "unbuild --stub"
+  },
+  "dependencies": {
+    "@unocss/core": "^0.45.25"
+  },
+  "devDependencies": {
+    "unbuild": "^0.8.11"
+  }
+}
