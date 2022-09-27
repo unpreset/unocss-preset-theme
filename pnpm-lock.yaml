@@ -1,11 +1,13 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@types/node': ^18.7.23
   unbuild: ^0.8.11
   unocss: ^0.45.25
   vitest: ^0.23.4
 
 devDependencies:
+  '@types/node': 18.7.23
   unbuild: 0.8.11
   unocss: 0.45.25
   vitest: 0.23.4
