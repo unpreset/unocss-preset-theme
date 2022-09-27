@@ -38,12 +38,12 @@
     "stub": "unbuild --stub",
     "test": "vitest"
   },
-  "dependencies": {
-    "@unocss/core": "^0.45.25"
-  },
   "devDependencies": {
-    "@unocss/preset-uno": "^0.45.25",
+    "unocss": "^0.45.25",
     "unbuild": "^0.8.11",
     "vitest": "^0.23.4"
+  },
+  "peerDependencies": {
+    "unocss": "^0.45.25"
   }
 }

@@ -1,5 +1,5 @@
-import { createGenerator } from '@unocss/core'
-import presetUno from '@unocss/preset-uno'
+import { createGenerator, presetUno } from 'unocss'
+import { Theme } from 'unocss/preset-uno'
 import { describe, expect, test } from 'vitest'
 import presetTheme from '../src'
 
@@ -7,7 +7,7 @@ describe('theme', () => {
   const uno = createGenerator({
     presets: [
       presetUno(),
-      presetTheme({
+      presetTheme<Theme>({
         theme: {
           dark: {
             colors: {
