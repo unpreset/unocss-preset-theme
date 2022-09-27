@@ -1,10 +1,10 @@
 {
   "name": "@unocss/preset-theme",
   "version": "0.0.1-beta.0",
+  "packageManager": "pnpm@7.11.0",
   "description": "dynamic theme",
   "author": "Dunqing <dengqing0821@gmail.com>",
   "license": "MIT",
-  "packageManager": "pnpm@7.11.0",
   "homepage": "https://github.com/Dunqing/unocss-preset-theme#readme",
   "repository": {
     "type": "git",
