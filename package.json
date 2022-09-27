@@ -36,13 +36,15 @@
   "scripts": {
     "build": "unbuild",
     "stub": "unbuild --stub",
-    "test": "vitest"
+    "test": "vitest",
+    "release": "bumpp package.json packages/**/package.json"
   },
   "devDependencies": {
     "@types/node": "^18.7.23",
     "unbuild": "^0.8.11",
     "unocss": "^0.45.25",
-    "vitest": "^0.23.4"
+    "vitest": "^0.23.4",
+    "bumpp": "^8.2.1"
   },
   "peerDependencies": {
     "unocss": "^0.45.25"
