@@ -1,6 +1,6 @@
 {
   "name": "@unocss/preset-theme",
-  "version": "0.0.0",
+  "version": "0.0.1-beta.0",
   "description": "dynamic theme",
   "author": "Dunqing <dengqing0821@gmail.com>",
   "license": "MIT",
