@@ -1,4 +1,5 @@
-import { mergeDeep, Preset } from 'unocss'
+import type { Preset } from 'unocss'
+import { mergeDeep } from 'unocss'
 
 const PRESET_THEME_RULE = 'PRESET_THEME_RULE'
 

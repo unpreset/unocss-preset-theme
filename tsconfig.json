@@ -14,8 +14,8 @@
     "skipLibCheck": true,
     "jsx": "preserve",
     "types": [
-      "node",
-    ],
+      "node"
+    ]
   },
   "exclude": [
     "**/dist/**",

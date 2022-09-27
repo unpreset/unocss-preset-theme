@@ -1,5 +1,5 @@
 import { createGenerator, presetUno } from 'unocss'
-import { Theme } from 'unocss/preset-uno'
+import type { Theme } from 'unocss/preset-uno'
 import { describe, expect, test } from 'vitest'
 import presetTheme from '../src'
 
