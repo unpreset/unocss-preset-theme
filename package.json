@@ -1,5 +1,5 @@
 {
-  "name": "@unocss/preset-theme",
+  "name": "unocss-preset-theme",
   "version": "0.0.1-beta.0",
   "packageManager": "pnpm@7.11.0",
   "description": "dynamic theme",

@@ -35,7 +35,7 @@ export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> =>
   const usedTheme: Array<ThemeValue> = []
 
   return {
-    name: '@unocss/preset-theme',
+    name: 'unocss-preset-theme',
     extendTheme(originalTheme) {
       const recursiveTheme = (theme: Record<string, any>, preKeys: string[] = []) => {
         Object.keys(theme).forEach((key) => {
