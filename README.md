@@ -11,7 +11,16 @@ import presetTheme from 'unocss-preset-theme'
 
 Unocss({
   presets: [
-    presetTheme(),
+    presetTheme({
+      theme: {
+        dark: {
+        },
+        light: {
+        },
+        compact: {
+        }
+      }
+    }),
   ],
 })
 ```
