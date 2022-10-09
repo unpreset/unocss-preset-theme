@@ -100,14 +100,17 @@ export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> =>
           const { css } = (await context.generator.generate(`light:${PRESET_THEME_RULE} dark:${PRESET_THEME_RULE}`, {
             preflights: false,
           }))
-
-          return css.split('\n').map((code) => {
-            const isDark = code.includes('.dark')
-            const curCode = /\{(.*)\}/.exec(code)?.[0]
-            if (!curCode)
-              return ''
-            return `${isDark ? '.dark' : 'root'}${curCode}`
-          }).reverse().filter(Boolean).join('\n')
+          const isMedia = css.includes('@media (prefers-color-scheme')
+          return css
+            .replace(/\/\* layer: .* \*\/\n/, '')
+            .replace(new RegExp(`\.(dark|light).*${PRESET_THEME_RULE}\{(.*)\}`, 'gm'), (full, th, targetCSS) => {
+              if (isMedia)
+                return targetCSS
+              if (th === 'dark')
+                return `.dark{${targetCSS}}`
+              else
+                return `root{${targetCSS}}`
+            })
         },
       },
     ],
