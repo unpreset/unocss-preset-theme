@@ -5,7 +5,7 @@ import { toVar } from './helpers'
 const PRESET_THEME_RULE = 'PRESET_THEME_RULE'
 
 export interface PresetTheme<Theme> {
-  theme: Record<'dark' | 'light', Theme>
+  theme: Record<string, Theme>
   /**
    * @default --un-preset-theme
    */
@@ -22,14 +22,14 @@ const getThemeVal = (theme: any, keys: string[], index = 0) => {
 }
 
 interface ThemeValue {
-  light?: string
-  dark?: string
+  theme: Record<string, string | undefined>
   name: string
 }
 
 export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> => {
   const { prefix = '--un-preset-theme' } = options
-  const { dark, light } = options.theme
+  const theme = options.theme
+  const keys = Object.keys(theme)
   const varsRE = new RegExp(`var\\((${prefix}.*)\\)`)
   const themeValues = new Map<string, ThemeValue>()
   const usedTheme: Array<ThemeValue> = []
@@ -37,16 +37,18 @@ export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> =>
   return {
     name: 'unocss-preset-theme',
     extendTheme(originalTheme) {
-      const recursiveTheme = (theme: Record<string, any>, preKeys: string[] = []) => {
-        Object.keys(theme).forEach((key) => {
-          const val = Reflect.get(theme, key)
+      const recursiveTheme = (curTheme: Record<string, any>, preKeys: string[] = []) => {
+        Object.keys(curTheme).forEach((key) => {
+          const val = Reflect.get(curTheme, key)
           const themeKeys = preKeys.concat(key)
 
           const setThemeValue = (name: string, index = 0) => {
             const defaultValue = getThemeVal(originalTheme, themeKeys) ?? ''
             themeValues.set(name, {
-              light: getThemeVal(light, themeKeys, index) ?? defaultValue,
-              dark: getThemeVal(dark, themeKeys, index) ?? defaultValue,
+              theme: keys.reduce((obj, key) => {
+                obj[key] = getThemeVal(theme[key], themeKeys, index) ?? defaultValue
+                return obj
+              }, {} as ThemeValue['theme']),
               name,
             })
           }
@@ -60,29 +62,33 @@ export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> =>
           }
           else if (typeof val === 'string') {
             const name = [prefix, ...themeKeys].join('-')
-            theme[key] = toVar(name)
+            curTheme[key] = toVar(name)
             setThemeValue(name)
           }
           else {
             recursiveTheme(val, themeKeys)
           }
         })
-        return theme
+        return curTheme
       }
 
-      Object.assign(originalTheme, mergeDeep(originalTheme, recursiveTheme(mergeDeep(dark, light))))
+      Object.assign(originalTheme, mergeDeep(originalTheme, recursiveTheme(
+        keys.reduce((obj, key) => {
+          return mergeDeep(obj, theme[key])
+        }, {} as T),
+      )))
     },
     rules: [
       [
-        new RegExp(`^${PRESET_THEME_RULE}$`),
-        (_, context) => {
-          const isDark = Array.from(context.variantMatch[3].values()).some(({ name }) => {
-            return name === 'dark'
-          })
+        new RegExp(`^${PRESET_THEME_RULE}\:(\\w+)$`),
+        (re) => {
           return usedTheme.reduce((obj, e) => {
+            const key = re?.[1]
+            if (!key)
+              return obj
             return {
               ...obj,
-              [e.name]: isDark ? e.dark : e.light,
+              [e.name]: e.theme[key],
             }
           }, {})
         },
@@ -97,19 +103,16 @@ export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> =>
         layer: 'theme',
         async getCSS(context) {
           await context.generator.generate('', { preflights: false })
-          const { css } = (await context.generator.generate(`light:${PRESET_THEME_RULE} dark:${PRESET_THEME_RULE}`, {
+          const { css } = (await context.generator.generate(keys.map(key => `${['dark', 'light'].includes(key) ? `${key}:` : ''}${PRESET_THEME_RULE}:${key}`), {
             preflights: false,
           }))
           const isMedia = css.includes('@media (prefers-color-scheme')
           return css
             .replace(/\/\* layer: .* \*\/\n/, '')
-            .replace(new RegExp(`\.(dark|light).*${PRESET_THEME_RULE}\{(.*)\}`, 'gm'), (full, th, targetCSS) => {
+            .replace(new RegExp(`(?:\\.(?:dark|light))?.*${PRESET_THEME_RULE}\\\\\\:(${keys.join('|')})(\{(.*)\})?`, 'gm'), (full, kind, targetCSS, cleanCode) => {
               if (isMedia)
-                return targetCSS
-              if (th === 'dark')
-                return `.dark{${targetCSS}}`
-              else
-                return `root{${targetCSS}}`
+                return cleanCode
+              return `${kind === 'light' ? 'root' : `.${kind}`}${targetCSS || ''}`
             })
         },
       },
