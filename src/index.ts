@@ -24,7 +24,6 @@ const getThemeVal = (theme: any, keys: string[], index = 0) => {
 interface ThemeValue {
   light?: string
   dark?: string
-  original?: string
   name: string
 }
 
@@ -44,10 +43,10 @@ export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> =>
           const themeKeys = preKeys.concat(key)
 
           const setThemeValue = (name: string, index = 0) => {
+            const defaultValue = getThemeVal(originalTheme, themeKeys) ?? ''
             themeValues.set(name, {
-              light: getThemeVal(light, themeKeys, index),
-              dark: getThemeVal(dark, themeKeys, index),
-              original: getThemeVal(originalTheme, themeKeys),
+              light: getThemeVal(light, themeKeys, index) ?? defaultValue,
+              dark: getThemeVal(dark, themeKeys, index) ?? defaultValue,
               name,
             })
           }
@@ -59,9 +58,9 @@ export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> =>
               setThemeValue(name, index)
             })
           }
-          else if (typeof val !== 'object') {
+          else if (typeof val === 'string') {
             const name = [prefix, ...themeKeys].join('-')
-            theme[key] = toVar(val)
+            theme[key] = toVar(name)
             setThemeValue(name)
           }
           else {
@@ -83,26 +82,32 @@ export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> =>
           return usedTheme.reduce((obj, e) => {
             return {
               ...obj,
-              [e.name]: (isDark ? e.dark : e.light) ?? e.original,
+              [e.name]: isDark ? e.dark : e.light,
             }
           }, {})
         },
       ],
     ],
+    layers: {
+      theme: 0,
+      default: 1,
+    },
     preflights: [
       {
         layer: 'theme',
         async getCSS(context) {
           await context.generator.generate('', { preflights: false })
-          const { css } = (await context.generator.generate(`${PRESET_THEME_RULE} dark:${PRESET_THEME_RULE}`, {
+          const { css } = (await context.generator.generate(`light:${PRESET_THEME_RULE} dark:${PRESET_THEME_RULE}`, {
             preflights: false,
           }))
 
-          const realCSS = css
-            .replace(`.dark\\:${PRESET_THEME_RULE}`, '')
-            .replace(`.${PRESET_THEME_RULE}`, 'root ')
-            .replace(/\/\*.*layer.*\*\/\s*\n/, '')
-          return realCSS
+          return css.split('\n').map((code) => {
+            const isDark = code.includes('.dark')
+            const curCode = /\{(.*)\}/.exec(code)?.[0]
+            if (!curCode)
+              return ''
+            return `${isDark ? '.dark' : 'root'}${curCode}`
+          }).reverse().filter(Boolean).join('\n')
         },
       },
     ],
