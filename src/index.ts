@@ -78,10 +78,14 @@ export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> =>
         },
       ],
     ],
+    layers: {
+      theme: Infinity,
+    },
     preflights: [
       {
         layer: 'theme',
         async getCSS(context) {
+          await context.generator.generate('', { preflights: false })
           const { css } = (await context.generator.generate(`${PRESET_THEME_RULE} dark:${PRESET_THEME_RULE}`, {
             preflights: false,
           }))
