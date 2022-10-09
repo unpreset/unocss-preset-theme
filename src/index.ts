@@ -1,5 +1,6 @@
 import type { Preset } from 'unocss'
 import { mergeDeep } from 'unocss'
+import { toVar } from './helpers'
 
 const PRESET_THEME_RULE = 'PRESET_THEME_RULE'
 
@@ -11,13 +12,13 @@ export interface PresetTheme<Theme> {
   prefix?: string
 }
 
-const getThemeVal = (theme: any, keys: string[]) => {
+const getThemeVal = (theme: any, keys: string[], index = 0) => {
   for (const key of keys) {
     theme = theme[key]
     if (theme === undefined)
       return
   }
-  return theme
+  return Array.isArray(theme) ? theme[index] : theme
 }
 
 interface ThemeValue {
@@ -42,16 +43,26 @@ export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> =>
           const val = Reflect.get(theme, key)
           const themeKeys = preKeys.concat(key)
 
-          if (typeof val !== 'object' && !Array.isArray(val)) {
-            const name = `${prefix}-${themeKeys.join('-')}`
-
-            theme[key] = `var(${name})`
+          const setThemeValue = (name: string, index = 0) => {
             themeValues.set(name, {
-              light: getThemeVal(light, themeKeys),
-              dark: getThemeVal(dark, themeKeys),
+              light: getThemeVal(light, themeKeys, index),
+              dark: getThemeVal(dark, themeKeys, index),
               original: getThemeVal(originalTheme, themeKeys),
               name,
             })
+          }
+
+          if (Array.isArray(val)) {
+            val.forEach((_, index) => {
+              const name = [prefix, ...themeKeys, index].join('-')
+              val[index] = toVar(name)
+              setThemeValue(name, index)
+            })
+          }
+          else if (typeof val !== 'object') {
+            const name = [prefix, ...themeKeys].join('-')
+            theme[key] = toVar(val)
+            setThemeValue(name)
           }
           else {
             recursiveTheme(val, themeKeys)
@@ -78,9 +89,6 @@ export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> =>
         },
       ],
     ],
-    layers: {
-      theme: Infinity,
-    },
     preflights: [
       {
         layer: 'theme',
