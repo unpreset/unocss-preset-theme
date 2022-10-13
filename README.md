@@ -1,5 +1,7 @@
 # unocss-preset-theme
 
+This preset will help you easily make dynamic theme switching.
+
 ## Installation
 
 ```bash
