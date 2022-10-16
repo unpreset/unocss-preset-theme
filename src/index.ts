@@ -58,13 +58,13 @@ export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> =>
 
           if (Array.isArray(val)) {
             val.forEach((_, index) => {
-              const name = [prefix, ...themeKeys, index].join('-')
+              const name = [prefix, ...themeKeys, index].join('-').toLocaleLowerCase()
               setThemeValue(name, index)
               val[index] = toVar(name)
             })
           }
           else if (typeof val === 'string') {
-            const name = [prefix, ...themeKeys].join('-')
+            const name = [prefix, ...themeKeys].join('-').toLocaleLowerCase()
             setThemeValue(name)
             curTheme[key] = toVar(name)
           }
