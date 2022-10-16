@@ -20,9 +20,9 @@ const onCompact: any = () => {
       dark: theme.dark,
       compact: theme.compact,
     }"
-    class="font-sans w-screen h-screen bg-container flex flex-col items-center"
+    class="font-sans w-screen h-screen bg-container flex flex-col items-center px-2 "
   >
-    <div class="flex flex-col w-md mt-40 border-2 border-color-border rounded-md px-xl py-lg">
+    <div class="flex flex-col sm:w-md w-full mt-40 border-2 border-color-border rounded-md px-xl py-lg">
       <div class="flex gap-x-4 ">
         <button
           class="text-base rounded-md px-base text-text py-xs border-color-border border-1 hover:border-primary-border hover:text-primary"
@@ -34,11 +34,11 @@ const onCompact: any = () => {
           class="text-base rounded-md px-base text-text py-xs border-color-border border-1 hover:border-primary-border hover:text-primary"
           @click="onCompact"
         >
-          {{ theme.compact ? 'un compact' : 'compact' }}
+          {{ theme.compact ? 'loose' : 'compact' }}
         </button>
       </div>
 
-      <div class="mt-10 w-400px flex flex-col">
+      <div class="mt-10 flex flex-col">
         <h1 class="text-text text-xl font-bold mb-sm">
           Preview
         </h1>
