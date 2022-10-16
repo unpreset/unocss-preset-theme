@@ -9,14 +9,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@unocss/reset": "^0.45.29",
     "vue": "^3.2.37"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.1.0",
     "typescript": "^4.6.4",
-    "vite": "^3.1.0",
-    "vue-tsc": "^0.40.4",
     "unocss": "^0.45.25",
-    "unocss-preset-theme": "workspace:*"
+    "unocss-preset-theme": "workspace:*",
+    "vite": "^3.1.0",
+    "vue-tsc": "^0.40.4"
   }
 }

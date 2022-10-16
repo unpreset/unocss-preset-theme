@@ -37,6 +37,7 @@
   "scripts": {
     "build": "unbuild",
     "stub": "unbuild --stub",
+    "play": "pnpm --filter ./playground run dev",
     "test": "vitest",
     "lint": "eslint .",
     "lint:fix": "pnpm run lint --fix",

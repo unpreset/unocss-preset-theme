@@ -22,6 +22,7 @@ importers:
 
   playground:
     specifiers:
+      '@unocss/reset': ^0.45.29
       '@vitejs/plugin-vue': ^3.1.0
       typescript: ^4.6.4
       unocss: ^0.45.25
@@ -30,6 +31,7 @@ importers:
       vue: ^3.2.37
       vue-tsc: ^0.40.4
     dependencies:
+      '@unocss/reset': 0.45.29
       vue: 3.2.41
     devDependencies:
       '@vitejs/plugin-vue': 3.1.2_vite@3.1.3+vue@3.2.41
@@ -871,6 +873,10 @@ packages:
   /@unocss/reset/0.45.25:
     resolution: {integrity: sha512-ab4sP4ybikPq6eje66SIgL/KAkrx6pjx03KFlziHGdfnXpNxTYP5RCXXw5rcVX778NyV6Lk0VyidC8jRp4XtTQ==}
     dev: true
+
+  /@unocss/reset/0.45.29:
+    resolution: {integrity: sha512-ytnKxyJdjvhjHrZ9yQUnQwiuL4hiXvjZUj88F2JkwgFJX6Y8jEz3V2xU1BPZNOv20/F6P1ngzEPRfrWHG8XG6A==}
+    dev: false
 
   /@unocss/scope/0.45.25:
     resolution: {integrity: sha512-ZAQYWfgVhjlswY31f4v7wcQ9PdKLYYHPch3rACPalbPJOc7NVmIWe3gU5H2gUZfeX+SwY9V8zw89DyM8DiRHPw==}
