@@ -56,14 +56,14 @@ export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> =>
           if (Array.isArray(val)) {
             val.forEach((_, index) => {
               const name = [prefix, ...themeKeys, index].join('-')
-              val[index] = toVar(name)
               setThemeValue(name, index)
+              val[index] = toVar(name)
             })
           }
           else if (typeof val === 'string') {
             const name = [prefix, ...themeKeys].join('-')
-            curTheme[key] = toVar(name)
             setThemeValue(name)
+            curTheme[key] = toVar(name)
           }
           else {
             recursiveTheme(val, themeKeys)
@@ -112,7 +112,7 @@ export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> =>
             .replace(new RegExp(`(?:\\.(?:dark|light))?.*${PRESET_THEME_RULE}\\\\\\:(${keys.join('|')})\\\\\\:\\d+(\{(.*)\})?`, 'gm'), (full, kind, targetCSS, cleanCode) => {
               if (isMedia)
                 return cleanCode
-              return `${kind === 'light' ? 'root' : `.${kind}`}${targetCSS || ''}`
+              return `${kind === 'light' ? ':root' : `.${kind}`}${targetCSS || ''}`
             })
         },
       },
