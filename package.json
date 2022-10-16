@@ -41,6 +41,7 @@
     "test": "vitest",
     "lint": "eslint .",
     "lint:fix": "pnpm run lint --fix",
+    "typecheck": "tsc --noEmit",
     "release": "bumpp package.json packages/**/package.json"
   },
   "peerDependencies": {
@@ -51,6 +52,7 @@
     "@types/node": "^18.7.23",
     "bumpp": "^8.2.1",
     "eslint": "^8.24.0",
+    "typescript": "^4.6.4",
     "unbuild": "^0.8.11",
     "unocss": "^0.45.25",
     "vitest": "^0.23.4"
