@@ -2,6 +2,8 @@
 
 This preset will help you easily make dynamic theme switching. Inspired by [here](https://github.com/unocss/unocss/issues/1390)
 
+> Next, I will build [unocss-preset-antd](https://github.com/Dunqing/unocss-preset-antd) based on this preset
+
 ## Installation
 
 ```bash
