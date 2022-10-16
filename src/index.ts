@@ -29,6 +29,9 @@ interface ThemeValue {
 export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> => {
   const { prefix = '--un-preset-theme' } = options
   const theme = options.theme
+  if (!theme.light)
+    theme.light = {} as T
+
   const keys = Object.keys(theme)
   const varsRE = new RegExp(`var\\((${prefix}.*)\\)`)
   const themeValues = new Map<string, ThemeValue>()
@@ -43,9 +46,9 @@ export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> =>
           const themeKeys = preKeys.concat(key)
 
           const setThemeValue = (name: string, index = 0) => {
-            const defaultValue = getThemeVal(originalTheme, themeKeys) ?? ''
             themeValues.set(name, {
               theme: keys.reduce((obj, key) => {
+                const defaultValue = key === 'light' ? getThemeVal(originalTheme, themeKeys) : ''
                 obj[key] = getThemeVal(theme[key], themeKeys, index) ?? defaultValue
                 return obj
               }, {} as ThemeValue['theme']),
@@ -84,7 +87,7 @@ export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> =>
         (re) => {
           return usedTheme.reduce((obj, e) => {
             const key = re?.[1]
-            if (!key)
+            if (!key || !e.theme[key])
               return obj
             return {
               ...obj,
