@@ -5,6 +5,13 @@ const theme = reactive({
   dark: false,
   compact: false,
 })
+
+const onTheme: any = () => {
+  theme.dark = !theme.dark
+}
+const onCompact: any = () => {
+  theme.compact = !theme.compact
+}
 </script>
 
 <template>
@@ -19,13 +26,13 @@ const theme = reactive({
       <div class="flex gap-x-4 ">
         <button
           class="text-base rounded-md px-base text-text py-xs border-color-border border-1 hover:border-primary-border hover:text-primary"
-          @click="theme.dark = !theme.dark"
+          @click="onTheme"
         >
           {{ theme.dark ? 'light' : 'dark' }}
         </button>
         <button
           class="text-base rounded-md px-base text-text py-xs border-color-border border-1 hover:border-primary-border hover:text-primary"
-          @click="theme.compact = !theme.compact"
+          @click="onCompact"
         >
           {{ theme.compact ? 'un compact' : 'compact' }}
         </button>
