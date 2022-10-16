@@ -80,7 +80,7 @@ export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> =>
     },
     rules: [
       [
-        new RegExp(`^${PRESET_THEME_RULE}\:(\\w+)$`),
+        new RegExp(`^${PRESET_THEME_RULE}\:(\\w+)\:(\\d+)$`),
         (re) => {
           return usedTheme.reduce((obj, e) => {
             const key = re?.[1]
@@ -103,13 +103,13 @@ export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> =>
         layer: 'theme',
         async getCSS(context) {
           await context.generator.generate('', { preflights: false })
-          const { css } = (await context.generator.generate(keys.map(key => `${['dark', 'light'].includes(key) ? `${key}:` : ''}${PRESET_THEME_RULE}:${key}`), {
+          const { css } = (await context.generator.generate(keys.map(key => `${['dark', 'light'].includes(key) ? `${key}:` : ''}${PRESET_THEME_RULE}:${key}:${Date.now()}`), {
             preflights: false,
           }))
           const isMedia = css.includes('@media (prefers-color-scheme')
           return css
             .replace(/\/\* layer: .* \*\/\n/, '')
-            .replace(new RegExp(`(?:\\.(?:dark|light))?.*${PRESET_THEME_RULE}\\\\\\:(${keys.join('|')})(\{(.*)\})?`, 'gm'), (full, kind, targetCSS, cleanCode) => {
+            .replace(new RegExp(`(?:\\.(?:dark|light))?.*${PRESET_THEME_RULE}\\\\\\:(${keys.join('|')})\\\\\\:\\d+(\{(.*)\})?`, 'gm'), (full, kind, targetCSS, cleanCode) => {
               if (isMedia)
                 return cleanCode
               return `${kind === 'light' ? 'root' : `.${kind}`}${targetCSS || ''}`
