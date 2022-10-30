@@ -105,7 +105,6 @@ export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> =>
       {
         layer: 'theme',
         async getCSS(context) {
-          await context.generator.generate('', { preflights: false })
           const { css } = (await context.generator.generate(keys.map(key => `${['dark', 'light'].includes(key) ? `${key}:` : ''}${PRESET_THEME_RULE}:${key}:${Date.now()}`), {
             preflights: false,
           }))
