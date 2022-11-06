@@ -32,7 +32,7 @@ Unocss({
 
 Usually you just need to set your `light theme` to `unocss` and your `dark theme` to `presetTheme`. This preset will transform your provide theme into css variables, then you just need to set the `dark` class or `compact` class (Depends on your theme name) in your html and you're done.
 
-### Just like this
+Just like this
 
 ```typescript
 import unocss from 'unocss/vite'
@@ -60,12 +60,24 @@ unocss<Theme>({
 })
 ```
 
-### This will be the final generated css
+This will be the final generated css
 
 ```css
 .dark{}
 :root{}
 .compact{}
+```
+
+Then you just need to set the class name of the theme to any parent element you want to use to apply the theme, like the following
+
+```html
+<div class="dark">
+  Dark mode
+  <div class="compact">
+    <div class="px-md">Use compact theme</div>
+  </div>
+</div>
+
 ```
 
 ## Options
