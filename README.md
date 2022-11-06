@@ -35,12 +35,12 @@ Usually you just need to set your `light theme` to `unocss` and your `dark theme
 Just like this
 
 ```typescript
-import unocss from 'unocss/vite'
+import Unocss from 'unocss/vite'
 import type { Theme } from 'unocss/preset-uno'
 import { presetUno } from 'unocss'
 import presetTheme from 'unocss-preset-theme'
 
-unocss<Theme>({
+Unocss<Theme>({
   // Configure light themes
   theme: {
   },
@@ -68,7 +68,7 @@ This will be the final generated css
 .compact{}
 ```
 
-Then you just need to set the class name of the theme to any parent element you want to use to apply the theme, like the following
+Then, you simply apply it as follows
 
 ```html
 <div class="dark">
@@ -77,7 +77,6 @@ Then you just need to set the class name of the theme to any parent element you 
     <div class="px-md">Use compact theme</div>
   </div>
 </div>
-
 ```
 
 ## Options
