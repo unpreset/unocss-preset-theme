@@ -5,8 +5,12 @@ import { toVar } from './helpers'
 const PRESET_THEME_RULE = 'PRESET_THEME_RULE'
 
 export interface PresetTheme<Theme> {
+  /**
+   * Multiple themes
+   */
   theme: Record<string, Theme>
   /**
+   * The prefix of the generated css variables
    * @default --un-preset-theme
    */
   prefix?: string
