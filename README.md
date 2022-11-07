@@ -10,23 +10,6 @@ This preset will help you easily make dynamic theme switching. Inspired by [here
 npm i -D unocss-preset-theme
 ```
 
-```ts
-import presetTheme from 'unocss-preset-theme'
-
-Unocss({
-  theme: {},
-  presets: [
-    presetTheme({
-      theme: {
-        dark: {
-        },
-        compact: {
-        }
-      }
-    }),
-  ],
-})
-```
 
 ## Usages
 
