@@ -63,9 +63,15 @@ Unocss<Theme>({
 This will be the final generated css
 
 ```css
+/* darkMode: class */
 .dark{}
 :root{}
 .compact{}
+
+/* If you set darkMode to media, the css will look like this */
+.compact{}
+@media (prefers-color-scheme: dark){}
+@media (prefers-color-scheme: light){}
 ```
 
 Then, you simply apply it as follows
