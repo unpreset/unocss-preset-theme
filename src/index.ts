@@ -118,9 +118,8 @@ export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> =>
             .replace(new RegExp(`(?:\\.(?:dark|light))?.*${PRESET_THEME_RULE}\\\\\\:(${keys.join('|')})\\\\\\:\\d+(\{(.*)\})?`, 'gm'), (full, kind, targetCSS, cleanCode) => {
               if (isMedia) {
                 // @media only support dark and light
-                if (kind === 'dark' || kind === 'light') {
+                if (kind === 'dark' || kind === 'light')
                   return cleanCode
-                }
               }
               return `${kind === 'light' ? ':root' : `.${kind}`}${targetCSS || ''}`
             })

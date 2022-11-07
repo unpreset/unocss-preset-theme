@@ -79,11 +79,11 @@ test('media dark mode', async () => {
   const uno = createGenerator({
     theme: {
       colors: {
-        primary: '#123456'
+        primary: '#123456',
       },
       fontSize: {
         xs: ['1.75rem', '2rem'],
-      }
+      },
     },
     presets: [
       presetUno({
@@ -94,7 +94,7 @@ test('media dark mode', async () => {
           dark: {
             colors: {
               primary: '#654321',
-            }
+            },
           },
           compact: {
             fontSize: {
