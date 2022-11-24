@@ -1,5 +1,5 @@
-import type { Preset } from 'unocss'
-import { mergeDeep } from 'unocss'
+import type { Preset } from '@unocss/core'
+import { mergeDeep } from '@unocss/core'
 import { toVar } from './helpers'
 
 const PRESET_THEME_RULE = 'PRESET_THEME_RULE'
