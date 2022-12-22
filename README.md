@@ -70,13 +70,18 @@ Then, you simply apply it as follows
 
 ## Options
 
+### prefix
+
+The prefix of the generated css variables, default is `--un-preset-theme`
+
 ### theme
 
 Your different theme. like `{ dark: {}, other: {} }`
 
-### prefix
+### selectors
 
-The prefix of the generated css variables, default is `--un-preset-theme`
+Customize the selectors of the generated css variables `{ light: ':root', [themeName]: '.[themeName]' }`
+
 
 ## Examples
 
