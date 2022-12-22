@@ -14,6 +14,13 @@ export interface PresetTheme<Theme> {
    * @default --un-preset-theme
    */
   prefix?: string
+  /**
+   * Customize the selectors of the generated css variables
+   * @default { light: ':root', [themeName]: '.[themeName]' }
+   */
+  selectors?: {
+    [themeName: string]: string
+  }
 }
 
 const getThemeVal = (theme: any, keys: string[], index = 0) => {
@@ -31,8 +38,8 @@ interface ThemeValue {
 }
 
 export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> => {
-  const { prefix = '--un-preset-theme' } = options
-  const theme = options.theme
+  const { prefix = '--un-preset-theme', theme } = options
+  const selectors = Object.assign({ light: ':root' }, options.selectors || {})
   if (!theme.light)
     theme.light = {} as T
 
@@ -121,7 +128,7 @@ export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> =>
                 if (kind === 'dark' || kind === 'light')
                   return cleanCode
               }
-              return `${kind === 'light' ? ':root' : `.${kind}`}${targetCSS || ''}`
+              return `${selectors[kind] || `.${kind}`}${targetCSS || ''}`
             })
         },
       },
