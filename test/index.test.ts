@@ -114,10 +114,10 @@ describe('theme', () => {
       /* layer: theme */
       .compact{--un-preset-theme-fontSize-xs-0:0.75rem;--un-preset-theme-fontSize-xs-1:1rem;}
       @media (prefers-color-scheme: dark){
-      --un-preset-theme-colors-primary:#654321;
+      :root{--un-preset-theme-colors-primary:#654321;}
       }
       @media (prefers-color-scheme: light){
-      --un-preset-theme-colors-primary:#123456;--un-preset-theme-fontSize-xs-0:1.75rem;--un-preset-theme-fontSize-xs-1:1.75rem;
+      :root{--un-preset-theme-colors-primary:#123456;--un-preset-theme-fontSize-xs-0:1.75rem;--un-preset-theme-fontSize-xs-1:1.75rem;}
       }
       /* layer: default */
       .text-xs{font-size:var(--un-preset-theme-fontSize-xs-0);line-height:var(--un-preset-theme-fontSize-xs-1);}

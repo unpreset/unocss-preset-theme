@@ -126,7 +126,7 @@ export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> =>
               if (isMedia) {
                 // @media only support dark and light
                 if (kind === 'dark' || kind === 'light')
-                  return cleanCode
+                  return `:root{${cleanCode}}`
               }
               return `${selectors[kind] || `.${kind}`}${targetCSS || ''}`
             })
