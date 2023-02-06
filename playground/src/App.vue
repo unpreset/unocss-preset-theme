@@ -45,6 +45,9 @@ const onCompact: any = () => {
         <p class="text-text text-base">
           This is a long text
         </p>
+        <p class="text-primary/50 bg-container/20 text-base">
+          The color opacity is 0.5
+        </p>
       </div>
     </div>
   </div>
