@@ -45,17 +45,17 @@
     "release": "bumpp package.json packages/**/package.json"
   },
   "dependencies": {
-    "@unocss/core": "^0.48.0",
-    "@unocss/preset-mini": "^0.48.0"
+    "@unocss/core": "^0.49.4",
+    "@unocss/preset-mini": "^0.49.4"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.34.0",
-    "@types/node": "^18.11.17",
-    "@unocss/preset-uno": "^0.48.0",
+    "@antfu/eslint-config": "^0.35.1",
+    "@types/node": "^18.11.19",
+    "@unocss/preset-uno": "^0.49.4",
     "bumpp": "^8.2.1",
-    "eslint": "^8.30.0",
-    "typescript": "^4.9.4",
-    "unbuild": "^1.0.2",
-    "vitest": "^0.26.2"
+    "eslint": "^8.33.0",
+    "typescript": "^4.9.5",
+    "unbuild": "^1.1.1",
+    "vitest": "^0.28.4"
   }
 }
