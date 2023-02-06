@@ -1,10 +1,11 @@
 import type { Preset } from '@unocss/core'
 import { mergeDeep } from '@unocss/core'
-import { toVar } from './helpers'
+import { parseCssColor } from '@unocss/preset-mini/utils'
+import { getThemeVal, wrapRGBA, wrapVar } from './helpers'
 
 const PRESET_THEME_RULE = 'PRESET_THEME_RULE'
 
-export interface PresetTheme<Theme> {
+export interface PresetThemeOptions<Theme extends {}> {
   /**
    * Multiple themes
    */
@@ -23,28 +24,25 @@ export interface PresetTheme<Theme> {
   }
 }
 
-const getThemeVal = (theme: any, keys: string[], index = 0) => {
-  for (const key of keys) {
-    theme = theme[key]
-    if (theme === undefined)
-      return
-  }
-  return Array.isArray(theme) ? theme[index] : theme
-}
+/**
+ * @deprecated use `PresetThemeOptions` instead
+ * @see PresetThemeOptions
+ */
+export type PresetTheme<Theme extends {}> = PresetThemeOptions<Theme>
 
 interface ThemeValue {
-  theme: Record<string, string | undefined>
+  theme: Record<string, Record<string, string>>
   name: string
 }
 
-export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> => {
+export const presetTheme = <T extends {}>(options: PresetThemeOptions<T>): Preset<T> => {
   const { prefix = '--un-preset-theme', theme } = options
   const selectors = Object.assign({ light: ':root' }, options.selectors || {})
   if (!theme.light)
     theme.light = {} as T
 
   const keys = Object.keys(theme)
-  const varsRE = new RegExp(`var\\((${prefix}.*)\\)`)
+  const varsRE = new RegExp(`var\\((${prefix}[\\w-]*)\\)`)
   const themeValues = new Map<string, ThemeValue>()
   const usedTheme: Array<ThemeValue> = []
 
@@ -56,11 +54,21 @@ export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> =>
           const val = Reflect.get(curTheme, key)
           const themeKeys = preKeys.concat(key)
 
-          const setThemeValue = (name: string, index = 0) => {
+          const setThemeValue = (name: string, index = 0, isColor = false) => {
             themeValues.set(name, {
               theme: keys.reduce((obj, key) => {
-                const defaultValue = key === 'light' ? getThemeVal(originalTheme, themeKeys) : ''
-                obj[key] = getThemeVal(theme[key], themeKeys, index) ?? defaultValue
+                let themeValue = getThemeVal(theme[key], themeKeys, index) || (key === 'light' ? getThemeVal(originalTheme, themeKeys) : null)
+                if (themeValue) {
+                  if (isColor) {
+                    const cssColor = parseCssColor(themeValue)
+                    if (cssColor?.components)
+                      themeValue = cssColor.components.join(', ')
+                  }
+                  obj[key] = {
+                    [name]: themeValue,
+                  }
+                }
+
                 return obj
               }, {} as ThemeValue['theme']),
               name,
@@ -71,13 +79,20 @@ export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> =>
             val.forEach((_, index) => {
               const name = [prefix, ...themeKeys, index].join('-')
               setThemeValue(name, index)
-              val[index] = toVar(name)
+              val[index] = wrapVar(name)
             })
           }
           else if (typeof val === 'string') {
             const name = [prefix, ...themeKeys].join('-')
-            setThemeValue(name)
-            curTheme[key] = toVar(name)
+            if (themeKeys[0] === 'colors') {
+              const cssColor = parseCssColor(val)
+              setThemeValue(name, 0, true)
+              curTheme[key] = wrapRGBA(wrapVar(name), cssColor?.alpha)
+            }
+            else {
+              setThemeValue(name, 0)
+              curTheme[key] = wrapVar(name)
+            }
           }
           else {
             recursiveTheme(val, themeKeys)
@@ -102,7 +117,7 @@ export const presetTheme = <T extends {}>(options: PresetTheme<T>): Preset<T> =>
               return obj
             return {
               ...obj,
-              [e.name]: e.theme[key],
+              ...e.theme[key],
             }
           }, {})
         },

@@ -45,7 +45,8 @@
     "release": "bumpp package.json packages/**/package.json"
   },
   "dependencies": {
-    "@unocss/core": "^0.48.0"
+    "@unocss/core": "^0.48.0",
+    "@unocss/preset-mini": "^0.48.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.34.0",
