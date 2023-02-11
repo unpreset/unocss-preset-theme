@@ -85,8 +85,8 @@ Customize the selectors of the generated css variables `{ light: ':root', [theme
 
 ## Examples
 
-Please refer to the [playground](/playground/vite.config.ts) 
-
+- [playground](./examples/playground/)
+- [media](./examples/media/)
 
 ## License
 
