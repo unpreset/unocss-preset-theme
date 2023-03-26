@@ -1,7 +1,7 @@
 import type { Preset } from '@unocss/core'
 import { mergeDeep } from '@unocss/core'
 import { parseCssColor } from '@unocss/preset-mini/utils'
-import { getThemeVal, wrapRGBA, wrapVar } from './helpers'
+import { getThemeVal, wrapCSSFunction, wrapVar } from './helpers'
 
 const PRESET_THEME_RULE = 'PRESET_THEME_RULE'
 
@@ -86,8 +86,10 @@ export const presetTheme = <T extends {}>(options: PresetThemeOptions<T>): Prese
             const name = [prefix, ...themeKeys].join('-')
             if (themeKeys[0] === 'colors') {
               const cssColor = parseCssColor(val)
-              setThemeValue(name, 0, true)
-              curTheme[key] = wrapRGBA(wrapVar(name), cssColor?.alpha)
+              if (cssColor) {
+                setThemeValue(name, 0, true)
+                curTheme[key] = wrapCSSFunction(cssColor.type, wrapVar(name), cssColor?.alpha)
+              }
             }
             else {
               setThemeValue(name, 0)

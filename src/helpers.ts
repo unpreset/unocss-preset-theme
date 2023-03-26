@@ -9,6 +9,10 @@ export const wrapRGBA = (v: string, alpha?: string | number) => {
   return `rgba(${v}, ${alpha})`
 }
 
+export const wrapCSSFunction = (name: string, v: string, alpha: string | number | undefined) => {
+  return `${name}(${alpha !== undefined ? [v, alpha].join(name.includes('rgb') ? ',' : ' ') : v})`
+}
+
 export const getThemeVal = (theme: any, keys: string[], index = 0) => {
   for (const key of keys) {
     theme = theme[key]

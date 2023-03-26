@@ -174,6 +174,8 @@ describe('theme', () => {
         colors: {
           rgb: 'rgb(255, 0, 0)',
           rgba: 'rgba(255, 0, 0, 0.5)',
+          hsl: 'hsl(0, 100%, 50%)',
+          hsla: 'hsl(0, 100%, 50%, 0.5)',
         },
       },
     }, {
@@ -183,24 +185,30 @@ describe('theme', () => {
             colors: {
               rgb: 'rgb(0, 255, 0)',
               rgba: 'rgba(0, 255, 0, 0.5)',
+              hsl: 'hsl(0, 100%, 50%)',
+              hsla: 'hsl(100, 100%, 50%, 0.5)',
             },
           },
         },
       },
     })
 
-    const { css } = await uno.generate('text-main text-rgb text-rgba text-rgb/40 text-rgba/50')
+    const { css } = await uno.generate('text-main text-rgb text-rgba text-rgb/40 text-rgba/50 text-hsl text-hsl/60 text-hsla text-hsla/60')
     expect(css).toMatchInlineSnapshot(`
       "/* layer: preflights */
       *,::before,::after{--un-rotate:0;--un-rotate-x:0;--un-rotate-y:0;--un-rotate-z:0;--un-scale-x:1;--un-scale-y:1;--un-scale-z:1;--un-skew-x:0;--un-skew-y:0;--un-translate-x:0;--un-translate-y:0;--un-translate-z:0;--un-pan-x: ;--un-pan-y: ;--un-pinch-zoom: ;--un-scroll-snap-strictness:proximity;--un-ordinal: ;--un-slashed-zero: ;--un-numeric-figure: ;--un-numeric-spacing: ;--un-numeric-fraction: ;--un-border-spacing-x:0;--un-border-spacing-y:0;--un-ring-offset-shadow:0 0 rgba(0,0,0,0);--un-ring-shadow:0 0 rgba(0,0,0,0);--un-shadow-inset: ;--un-shadow:0 0 rgba(0,0,0,0);--un-ring-inset: ;--un-ring-offset-width:0px;--un-ring-offset-color:#fff;--un-ring-width:0px;--un-ring-color:rgba(147,197,253,0.5);--un-blur: ;--un-brightness: ;--un-contrast: ;--un-drop-shadow: ;--un-grayscale: ;--un-hue-rotate: ;--un-invert: ;--un-saturate: ;--un-sepia: ;--un-backdrop-blur: ;--un-backdrop-brightness: ;--un-backdrop-contrast: ;--un-backdrop-grayscale: ;--un-backdrop-hue-rotate: ;--un-backdrop-invert: ;--un-backdrop-opacity: ;--un-backdrop-saturate: ;--un-backdrop-sepia: ;}::backdrop{--un-rotate:0;--un-rotate-x:0;--un-rotate-y:0;--un-rotate-z:0;--un-scale-x:1;--un-scale-y:1;--un-scale-z:1;--un-skew-x:0;--un-skew-y:0;--un-translate-x:0;--un-translate-y:0;--un-translate-z:0;--un-pan-x: ;--un-pan-y: ;--un-pinch-zoom: ;--un-scroll-snap-strictness:proximity;--un-ordinal: ;--un-slashed-zero: ;--un-numeric-figure: ;--un-numeric-spacing: ;--un-numeric-fraction: ;--un-border-spacing-x:0;--un-border-spacing-y:0;--un-ring-offset-shadow:0 0 rgba(0,0,0,0);--un-ring-shadow:0 0 rgba(0,0,0,0);--un-shadow-inset: ;--un-shadow:0 0 rgba(0,0,0,0);--un-ring-inset: ;--un-ring-offset-width:0px;--un-ring-offset-color:#fff;--un-ring-width:0px;--un-ring-color:rgba(147,197,253,0.5);--un-blur: ;--un-brightness: ;--un-contrast: ;--un-drop-shadow: ;--un-grayscale: ;--un-hue-rotate: ;--un-invert: ;--un-saturate: ;--un-sepia: ;--un-backdrop-blur: ;--un-backdrop-brightness: ;--un-backdrop-contrast: ;--un-backdrop-grayscale: ;--un-backdrop-hue-rotate: ;--un-backdrop-invert: ;--un-backdrop-opacity: ;--un-backdrop-saturate: ;--un-backdrop-sepia: ;}
       /* layer: theme */
-      .dark{--un-preset-theme-colors-rgb:0, 255, 0;--un-preset-theme-colors-rgba:0, 255, 0;}
-      :root{--un-preset-theme-colors-rgb:255, 0, 0;--un-preset-theme-colors-rgba:255, 0, 0;}
+      .dark{--un-preset-theme-colors-rgb:0, 255, 0;--un-preset-theme-colors-rgba:0, 255, 0;--un-preset-theme-colors-hsl:0, 100%, 50%;--un-preset-theme-colors-hsla:100, 100%, 50%;}
+      :root{--un-preset-theme-colors-rgb:255, 0, 0;--un-preset-theme-colors-rgba:255, 0, 0;--un-preset-theme-colors-hsl:0, 100%, 50%;--un-preset-theme-colors-hsla:0, 100%, 50%;}
       /* layer: default */
+      .text-hsl{--un-text-opacity:1;color:hsla(var(--un-preset-theme-colors-hsl),var(--un-text-opacity));}
+      .text-hsl\\\\/60{color:hsla(var(--un-preset-theme-colors-hsl),0.6);}
+      .text-hsla,
+      .text-hsla\\\\/60{color:hsl(var(--un-preset-theme-colors-hsla) 0.5);}
       .text-rgb{--un-text-opacity:1;color:rgba(var(--un-preset-theme-colors-rgb),var(--un-text-opacity));}
       .text-rgb\\\\/40{color:rgba(var(--un-preset-theme-colors-rgb),0.4);}
       .text-rgba,
-      .text-rgba\\\\/50{color:rgba(var(--un-preset-theme-colors-rgba), 0.5);}"
+      .text-rgba\\\\/50{color:rgba(var(--un-preset-theme-colors-rgba),0.5);}"
     `)
   })
 
