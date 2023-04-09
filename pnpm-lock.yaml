@@ -6,7 +6,7 @@ importers:
     specifiers:
       '@antfu/eslint-config': ^0.37.0
       '@types/node': ^18.15.10
-      '@unocss/core': ^0.50.6
+      '@unocss/core': ^0.51.0
       '@unocss/preset-mini': ^0.50.6
       '@unocss/preset-uno': ^0.50.6
       bumpp: ^9.0.0
@@ -15,7 +15,7 @@ importers:
       unbuild: ^1.1.2
       vitest: ^0.29.7
     dependencies:
-      '@unocss/core': 0.50.6
+      '@unocss/core': 0.51.0
       '@unocss/preset-mini': 0.50.6
     devDependencies:
       '@antfu/eslint-config': 0.37.0_j4766f7ecgqbon3u7zlxn5zszu
@@ -1043,6 +1043,10 @@ packages:
 
   /@unocss/core/0.50.6:
     resolution: {integrity: sha512-WMIp8xr7YSlID2whqfRGLwagp59e6u4ckPACEpoDOW8sTeSPRZm54hxPhuWXD1SQuqcwHPMtM9nzGD8UOnqQxA==}
+
+  /@unocss/core/0.51.0:
+    resolution: {integrity: sha512-uU/dvbrAcRqx5j7Qm19aewtRZr1QQ0Lg6mQhfCYhXQdIlT4sjT8FtduCchWMYQdsAb/kh2eP0LXT5KAP1REnoQ==}
+    dev: false
 
   /@unocss/inspector/0.50.6:
     resolution: {integrity: sha512-6nX1YtaL67ohn/PfSSBv3npJ8qZcdc7S9X2zE6PUD/xhwtz7Bohx9I/KtmFdjJz5WeeGR7di0uYC6xsAcFLndQ==}

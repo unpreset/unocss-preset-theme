@@ -45,7 +45,7 @@
     "release": "bumpp package.json packages/**/package.json"
   },
   "dependencies": {
-    "@unocss/core": "^0.50.6",
+    "@unocss/core": "^0.51.0",
     "@unocss/preset-mini": "^0.50.6"
   },
   "devDependencies": {
