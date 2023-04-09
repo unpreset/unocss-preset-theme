@@ -8,7 +8,7 @@ importers:
       '@types/node': ^18.15.10
       '@unocss/core': ^0.50.6
       '@unocss/preset-mini': ^0.50.6
-      '@unocss/preset-uno': ^0.50.6
+      '@unocss/preset-uno': ^0.51.0
       bumpp: ^9.0.0
       eslint: ^8.36.0
       typescript: ^5.0.2
@@ -20,7 +20,7 @@ importers:
     devDependencies:
       '@antfu/eslint-config': 0.37.0_j4766f7ecgqbon3u7zlxn5zszu
       '@types/node': 18.15.10
-      '@unocss/preset-uno': 0.50.6
+      '@unocss/preset-uno': 0.51.0
       bumpp: 9.0.0
       eslint: 8.36.0
       typescript: 5.0.2
@@ -1044,6 +1044,16 @@ packages:
   /@unocss/core/0.50.6:
     resolution: {integrity: sha512-WMIp8xr7YSlID2whqfRGLwagp59e6u4ckPACEpoDOW8sTeSPRZm54hxPhuWXD1SQuqcwHPMtM9nzGD8UOnqQxA==}
 
+  /@unocss/core/0.51.0:
+    resolution: {integrity: sha512-uU/dvbrAcRqx5j7Qm19aewtRZr1QQ0Lg6mQhfCYhXQdIlT4sjT8FtduCchWMYQdsAb/kh2eP0LXT5KAP1REnoQ==}
+    dev: true
+
+  /@unocss/extractor-arbitrary-variants/0.51.0:
+    resolution: {integrity: sha512-UL1XAE44zkcbSmlQEk4IxvFHpL+xrqfCbIYjALwhaToqCsnyhxMTuiOLySF1fr9uAknMiHsRM9BbmBAqjrHR2w==}
+    dependencies:
+      '@unocss/core': 0.51.0
+    dev: true
+
   /@unocss/inspector/0.50.6:
     resolution: {integrity: sha512-6nX1YtaL67ohn/PfSSBv3npJ8qZcdc7S9X2zE6PUD/xhwtz7Bohx9I/KtmFdjJz5WeeGR7di0uYC6xsAcFLndQ==}
     dependencies:
@@ -1084,6 +1094,13 @@ packages:
     dependencies:
       '@unocss/core': 0.50.6
 
+  /@unocss/preset-mini/0.51.0:
+    resolution: {integrity: sha512-2/N9CaAcoykUWD9CGoTbWcqmvPfw3KBcx8Aa8HcgEVQVF2lZIroovpd+SYyOGnZlaGBUtqJklA9z0rtFnXRfLg==}
+    dependencies:
+      '@unocss/core': 0.51.0
+      '@unocss/extractor-arbitrary-variants': 0.51.0
+    dev: true
+
   /@unocss/preset-tagify/0.50.6:
     resolution: {integrity: sha512-ZyG/SJMobn4GZMbgrZOxT59ARp22LwgJGArCwJVosh3rraRVlb+B4x6ctMl6JOiLG5B1lHT9vZ92//u51Y0WTw==}
     dependencies:
@@ -1105,6 +1122,14 @@ packages:
       '@unocss/preset-wind': 0.50.6
     dev: true
 
+  /@unocss/preset-uno/0.51.0:
+    resolution: {integrity: sha512-/L82w0yG6LzFFy3vS8Jj/De/Y5/5x34efxiQZbX1QRP5LQkqrYhRwjWg3xbL8E9lwf3WhVP9ddBk/mjjBIZwQw==}
+    dependencies:
+      '@unocss/core': 0.51.0
+      '@unocss/preset-mini': 0.51.0
+      '@unocss/preset-wind': 0.51.0
+    dev: true
+
   /@unocss/preset-web-fonts/0.50.6:
     resolution: {integrity: sha512-81meQMAq2lOy7k5qHQZ2EGWN5iJQUJOLl8dc9dxIo1eZPgiZQruxTVr4AkNVH5LRFcjHs/1sDb2CYxAiakwTVg==}
     dependencies:
@@ -1117,6 +1142,13 @@ packages:
     dependencies:
       '@unocss/core': 0.50.6
       '@unocss/preset-mini': 0.50.6
+    dev: true
+
+  /@unocss/preset-wind/0.51.0:
+    resolution: {integrity: sha512-67bkne3gORT0Fu8k6L6y6TJVC2jZuc6deWd79GEDc0m9GDDLmpE2fqvHlCsFk3DI3rZsQtseoLTe57M+hBulRQ==}
+    dependencies:
+      '@unocss/core': 0.51.0
+      '@unocss/preset-mini': 0.51.0
     dev: true
 
   /@unocss/reset/0.50.6:
