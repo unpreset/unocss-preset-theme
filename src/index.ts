@@ -103,11 +103,11 @@ export const presetTheme = <T extends {}>(options: PresetThemeOptions<T>): Prese
         return curTheme
       }
 
-      Object.assign(originalTheme, mergeDeep(originalTheme, recursiveTheme(
+      return mergeDeep(originalTheme, recursiveTheme(
         keys.reduce((obj, key) => {
           return mergeDeep(obj, theme[key])
         }, {} as T),
-      )))
+      ))
     },
     rules: [
       [

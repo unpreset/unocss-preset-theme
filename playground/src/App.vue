@@ -49,6 +49,7 @@ const onCompact: any = () => {
           The color opacity is 0.5
         </p>
       </div>
+      <p>You can see all the css in <span class="font-bold">Devtools</span></p>
     </div>
   </div>
 </template>
