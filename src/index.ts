@@ -35,7 +35,7 @@ interface ThemeValue {
   name: string
 }
 
-export const presetTheme = <T extends {}>(options: PresetThemeOptions<T>): Preset<T> => {
+export function presetTheme<T extends {}>(options: PresetThemeOptions<T>): Preset<T> {
   const { prefix = '--un-preset-theme', theme } = options
   const selectors = Object.assign({ light: ':root' }, options.selectors || {})
   if (!theme.light)

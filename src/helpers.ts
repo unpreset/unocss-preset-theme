@@ -1,19 +1,19 @@
-export const wrapVar = (name: string) => {
+export function wrapVar(name: string) {
   return `var(${name})`
 }
 
-export const wrapRGBA = (v: string, alpha?: string | number) => {
+export function wrapRGBA(v: string, alpha?: string | number) {
   if (alpha === undefined)
     return `rgb(${v})`
 
   return `rgba(${v}, ${alpha})`
 }
 
-export const wrapCSSFunction = (name: string, v: string, alpha: string | number | undefined) => {
+export function wrapCSSFunction(name: string, v: string, alpha: string | number | undefined) {
   return `${name}(${alpha !== undefined ? [v, alpha].join(name.includes('rgb') ? ',' : ' ') : v})`
 }
 
-export const getThemeVal = (theme: any, keys: string[], index = 0) => {
+export function getThemeVal(theme: any, keys: string[], index = 0) {
   for (const key of keys) {
     theme = theme[key]
     if (theme === undefined)

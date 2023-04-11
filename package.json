@@ -44,12 +44,12 @@
     "typecheck": "tsc --noEmit",
     "release": "bumpp package.json packages/**/package.json"
   },
+  "peerDependencies": {
+    "@unocss/core": "^0.51.0"
+  },
   "dependencies": {
     "@unocss/core": "^0.51.2",
     "@unocss/preset-mini": "^0.51.2"
-  },
-  "peerDependencies": {
-    "@unocss/core": "^0.51.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.38.4",
