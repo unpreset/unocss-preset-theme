@@ -59,6 +59,6 @@
     "eslint": "^8.38.0",
     "typescript": "^5.0.4",
     "unbuild": "^1.2.0",
-    "vitest": "^0.30.0"
+    "vitest": "^0.31.0"
   }
 }
