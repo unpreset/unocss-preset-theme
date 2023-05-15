@@ -49,6 +49,20 @@ describe('theme', () => {
               sm: ['1.875rem', '2.25rem'],
             },
           },
+          star: {
+            colors: {
+              main: {
+                100: '#1ffff1',
+                200: '#1ffff2',
+                300: '#1ffff3',
+                400: '#1ffff4',
+                500: '#1ffff4',
+                600: '#1ffff6',
+                700: '#1ffff7',
+                800: '#1ffff8',
+              },
+            },
+          },
         },
       }, options.themeOptions as any)),
     ],
@@ -70,9 +84,10 @@ describe('theme', () => {
       "/* layer: preflights */
       *,::before,::after{--un-rotate:0;--un-rotate-x:0;--un-rotate-y:0;--un-rotate-z:0;--un-scale-x:1;--un-scale-y:1;--un-scale-z:1;--un-skew-x:0;--un-skew-y:0;--un-translate-x:0;--un-translate-y:0;--un-translate-z:0;--un-pan-x: ;--un-pan-y: ;--un-pinch-zoom: ;--un-scroll-snap-strictness:proximity;--un-ordinal: ;--un-slashed-zero: ;--un-numeric-figure: ;--un-numeric-spacing: ;--un-numeric-fraction: ;--un-border-spacing-x:0;--un-border-spacing-y:0;--un-ring-offset-shadow:0 0 rgba(0,0,0,0);--un-ring-shadow:0 0 rgba(0,0,0,0);--un-shadow-inset: ;--un-shadow:0 0 rgba(0,0,0,0);--un-ring-inset: ;--un-ring-offset-width:0px;--un-ring-offset-color:#fff;--un-ring-width:0px;--un-ring-color:rgba(147,197,253,0.5);--un-blur: ;--un-brightness: ;--un-contrast: ;--un-drop-shadow: ;--un-grayscale: ;--un-hue-rotate: ;--un-invert: ;--un-saturate: ;--un-sepia: ;--un-backdrop-blur: ;--un-backdrop-brightness: ;--un-backdrop-contrast: ;--un-backdrop-grayscale: ;--un-backdrop-hue-rotate: ;--un-backdrop-invert: ;--un-backdrop-opacity: ;--un-backdrop-saturate: ;--un-backdrop-sepia: ;}::backdrop{--un-rotate:0;--un-rotate-x:0;--un-rotate-y:0;--un-rotate-z:0;--un-scale-x:1;--un-scale-y:1;--un-scale-z:1;--un-skew-x:0;--un-skew-y:0;--un-translate-x:0;--un-translate-y:0;--un-translate-z:0;--un-pan-x: ;--un-pan-y: ;--un-pinch-zoom: ;--un-scroll-snap-strictness:proximity;--un-ordinal: ;--un-slashed-zero: ;--un-numeric-figure: ;--un-numeric-spacing: ;--un-numeric-fraction: ;--un-border-spacing-x:0;--un-border-spacing-y:0;--un-ring-offset-shadow:0 0 rgba(0,0,0,0);--un-ring-shadow:0 0 rgba(0,0,0,0);--un-shadow-inset: ;--un-shadow:0 0 rgba(0,0,0,0);--un-ring-inset: ;--un-ring-offset-width:0px;--un-ring-offset-color:#fff;--un-ring-width:0px;--un-ring-color:rgba(147,197,253,0.5);--un-blur: ;--un-brightness: ;--un-contrast: ;--un-drop-shadow: ;--un-grayscale: ;--un-hue-rotate: ;--un-invert: ;--un-saturate: ;--un-sepia: ;--un-backdrop-blur: ;--un-backdrop-brightness: ;--un-backdrop-contrast: ;--un-backdrop-grayscale: ;--un-backdrop-hue-rotate: ;--un-backdrop-invert: ;--un-backdrop-opacity: ;--un-backdrop-saturate: ;--un-backdrop-sepia: ;}
       /* layer: theme */
+      .compact{--un-preset-theme-fontSize-sm-0:1.875rem;--un-preset-theme-fontSize-sm-1:2.25rem;--un-preset-theme-fontSize-xs-0:1.75rem;--un-preset-theme-fontSize-xs-1:2rem;}
       .dark{--un-preset-theme-colors-main-100:255, 255, 241;--un-preset-theme-colors-main-500:255, 255, 244;--un-preset-theme-colors-main-200:255, 255, 242;}
       :root{--un-preset-theme-colors-main-100:0, 0, 1;--un-preset-theme-colors-main-500:0, 0, 4;--un-preset-theme-colors-main-200:0, 0, 2;--un-preset-theme-fontSize-sm-0:0.875rem;--un-preset-theme-fontSize-sm-1:0.875rem;--un-preset-theme-fontSize-xs-0:0.75rem;--un-preset-theme-fontSize-xs-1:0.75rem;}
-      .compact{--un-preset-theme-fontSize-sm-0:1.875rem;--un-preset-theme-fontSize-sm-1:2.25rem;--un-preset-theme-fontSize-xs-0:1.75rem;--un-preset-theme-fontSize-xs-1:2rem;}
+      .star{--un-preset-theme-colors-main-100:31, 255, 241;--un-preset-theme-colors-main-500:31, 255, 244;--un-preset-theme-colors-main-200:31, 255, 242;}
       /* layer: default */
       .border-main-500{--un-border-opacity:1;border-color:rgba(var(--un-preset-theme-colors-main-500),var(--un-border-opacity));}
       .bg-main-200{--un-bg-opacity:1;background-color:rgba(var(--un-preset-theme-colors-main-200),var(--un-bg-opacity));}
@@ -235,9 +250,9 @@ describe('theme', () => {
       "/* layer: preflights */
       *,::before,::after{--un-rotate:0;--un-rotate-x:0;--un-rotate-y:0;--un-rotate-z:0;--un-scale-x:1;--un-scale-y:1;--un-scale-z:1;--un-skew-x:0;--un-skew-y:0;--un-translate-x:0;--un-translate-y:0;--un-translate-z:0;--un-pan-x: ;--un-pan-y: ;--un-pinch-zoom: ;--un-scroll-snap-strictness:proximity;--un-ordinal: ;--un-slashed-zero: ;--un-numeric-figure: ;--un-numeric-spacing: ;--un-numeric-fraction: ;--un-border-spacing-x:0;--un-border-spacing-y:0;--un-ring-offset-shadow:0 0 rgba(0,0,0,0);--un-ring-shadow:0 0 rgba(0,0,0,0);--un-shadow-inset: ;--un-shadow:0 0 rgba(0,0,0,0);--un-ring-inset: ;--un-ring-offset-width:0px;--un-ring-offset-color:#fff;--un-ring-width:0px;--un-ring-color:rgba(147,197,253,0.5);--un-blur: ;--un-brightness: ;--un-contrast: ;--un-drop-shadow: ;--un-grayscale: ;--un-hue-rotate: ;--un-invert: ;--un-saturate: ;--un-sepia: ;--un-backdrop-blur: ;--un-backdrop-brightness: ;--un-backdrop-contrast: ;--un-backdrop-grayscale: ;--un-backdrop-hue-rotate: ;--un-backdrop-invert: ;--un-backdrop-opacity: ;--un-backdrop-saturate: ;--un-backdrop-sepia: ;}::backdrop{--un-rotate:0;--un-rotate-x:0;--un-rotate-y:0;--un-rotate-z:0;--un-scale-x:1;--un-scale-y:1;--un-scale-z:1;--un-skew-x:0;--un-skew-y:0;--un-translate-x:0;--un-translate-y:0;--un-translate-z:0;--un-pan-x: ;--un-pan-y: ;--un-pinch-zoom: ;--un-scroll-snap-strictness:proximity;--un-ordinal: ;--un-slashed-zero: ;--un-numeric-figure: ;--un-numeric-spacing: ;--un-numeric-fraction: ;--un-border-spacing-x:0;--un-border-spacing-y:0;--un-ring-offset-shadow:0 0 rgba(0,0,0,0);--un-ring-shadow:0 0 rgba(0,0,0,0);--un-shadow-inset: ;--un-shadow:0 0 rgba(0,0,0,0);--un-ring-inset: ;--un-ring-offset-width:0px;--un-ring-offset-color:#fff;--un-ring-width:0px;--un-ring-color:rgba(147,197,253,0.5);--un-blur: ;--un-brightness: ;--un-contrast: ;--un-drop-shadow: ;--un-grayscale: ;--un-hue-rotate: ;--un-invert: ;--un-saturate: ;--un-sepia: ;--un-backdrop-blur: ;--un-backdrop-brightness: ;--un-backdrop-contrast: ;--un-backdrop-grayscale: ;--un-backdrop-hue-rotate: ;--un-backdrop-invert: ;--un-backdrop-opacity: ;--un-backdrop-saturate: ;--un-backdrop-sepia: ;}
       /* layer: theme */
+      .compact{--un-preset-theme-spacing-md:10px;--un-preset-theme-spacing-lg:12px;}
       .dark{--un-preset-theme-spacing-lg:15px;}
       :root{--un-preset-theme-spacing-lg:1.125rem;}
-      .compact{--un-preset-theme-spacing-md:10px;--un-preset-theme-spacing-lg:12px;}
       /* layer: default */
       .p-lg{padding:var(--un-preset-theme-spacing-lg);}
       .px-5{padding-left:1.25rem;padding-right:1.25rem;}

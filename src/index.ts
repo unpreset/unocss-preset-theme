@@ -3,7 +3,12 @@ import { mergeDeep } from '@unocss/core'
 import { parseCssColor } from '@unocss/preset-mini/utils'
 import { getThemeVal, wrapCSSFunction, wrapVar } from './helpers'
 
+const defaultThemeNames = ['dark', 'light']
 const PRESET_THEME_RULE = 'PRESET_THEME_RULE'
+
+interface Selectors {
+  [themeName: string]: string
+}
 
 export interface PresetThemeOptions<Theme extends {}> {
   /**
@@ -19,9 +24,7 @@ export interface PresetThemeOptions<Theme extends {}> {
    * Customize the selectors of the generated css variables
    * @default { light: ':root', [themeName]: '.[themeName]' }
    */
-  selectors?: {
-    [themeName: string]: string
-  }
+  selectors?: Selectors
 }
 
 /**
@@ -37,10 +40,9 @@ interface ThemeValue {
 
 export function presetTheme<T extends {}>(options: PresetThemeOptions<T>): Preset<T> {
   const { prefix = '--un-preset-theme', theme } = options
-  const selectors = Object.assign({ light: ':root' }, options.selectors || {})
+  const selectors: Selectors = { light: ':root', ...options.selectors }
   if (!theme.light)
     theme.light = {} as T
-
   const keys = Object.keys(theme)
   const varsRE = new RegExp(`var\\((${prefix}[\\w-]*)\\)`)
   const themeValues = new Map<string, ThemeValue>()
@@ -111,7 +113,7 @@ export function presetTheme<T extends {}>(options: PresetThemeOptions<T>): Prese
     },
     rules: [
       [
-        new RegExp(`^${PRESET_THEME_RULE}\:(\\w+)\:(\\d+)$`),
+        new RegExp(`^${PRESET_THEME_RULE}\:(.*)\:`),
         (re) => {
           return usedTheme.reduce((obj, e) => {
             const key = re?.[1]
@@ -125,6 +127,22 @@ export function presetTheme<T extends {}>(options: PresetThemeOptions<T>): Prese
         },
       ],
     ],
+    variants: [
+      {
+        name: 'preset-theme-rule',
+        match(matcher) {
+          if (matcher.includes(PRESET_THEME_RULE)) {
+            return {
+              matcher,
+              selector(input) {
+                const themeName = input.match(/\:(\w+)\\\:\d+/)![1]
+                return selectors[themeName] || `.${themeName}`
+              },
+            }
+          }
+        },
+      },
+    ],
     layers: {
       theme: 0,
       default: 1,
@@ -133,20 +151,23 @@ export function presetTheme<T extends {}>(options: PresetThemeOptions<T>): Prese
       {
         layer: 'theme',
         async getCSS(context) {
-          const { css } = (await context.generator.generate(keys.map(key => `${['dark', 'light'].includes(key) ? `${key}:` : ''}${PRESET_THEME_RULE}:${key}:${Date.now()}`), {
-            preflights: false,
-          }))
-          const isMedia = css.includes('@media (prefers-color-scheme')
-          return css
-            .replace(/\/\* layer: .* \*\/\n/, '')
-            .replace(new RegExp(`(?:\\.(?:dark|light))?.*${PRESET_THEME_RULE}\\\\\\:(${keys.join('|')})\\\\\\:\\d+(\{(.*)\})?`, 'gm'), (full, kind, targetCSS, cleanCode) => {
-              if (isMedia) {
-                // @media only support dark and light
-                if (kind === 'dark' || kind === 'light')
-                  return `:root{${cleanCode}}`
-              }
-              return `${selectors[kind] || `.${kind}`}${targetCSS || ''}`
-            })
+          const { css } = await context.generator.generate(
+            // Add Date.now() to avoid cache
+            keys.map(key => `${defaultThemeNames.includes(key) ? `${key}:` : ''}${PRESET_THEME_RULE}:${key}:${Date.now()}`),
+            { preflights: false },
+          )
+          return css.split('\n').slice(1).map((line, index, lines) => {
+            const prevLine = index > 0 ? lines[index - 1] : ''
+            if (prevLine.includes('@media')) {
+              // convert .light{} to :root{}
+              line = line.replace(/.*?{/, ':root{')
+            }
+            else {
+              // convert .light .themename{} to .themename{}
+              line = line.replace(/\..*?\s(.*\{)/, '$1')
+            }
+            return line
+          }).join('\n')
         },
       },
     ],
