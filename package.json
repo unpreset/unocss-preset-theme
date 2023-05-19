@@ -52,7 +52,7 @@
     "@unocss/preset-mini": "^0.51.12"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.38.6",
+    "@antfu/eslint-config": "^0.39.0",
     "@types/node": "^20.1.4",
     "@unocss/preset-uno": "^0.51.12",
     "bumpp": "^9.1.0",
