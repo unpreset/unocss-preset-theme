@@ -45,10 +45,10 @@
     "release": "bumpp package.json packages/**/package.json"
   },
   "peerDependencies": {
-    "@unocss/core": "^0.51.0"
+    "@unocss/core": "^0.51.0 || ^0.52.0"
   },
   "dependencies": {
-    "@unocss/core": "^0.51.12",
+    "@unocss/core": "^0.52.0",
     "@unocss/preset-mini": "^0.51.12"
   },
   "devDependencies": {

@@ -5,8 +5,8 @@ importers:
   .:
     dependencies:
       '@unocss/core':
-        specifier: ^0.51.12
-        version: 0.51.12
+        specifier: ^0.52.0
+        version: 0.52.0
       '@unocss/preset-mini':
         specifier: ^0.51.12
         version: 0.51.12
@@ -1029,6 +1029,10 @@ packages:
 
   /@unocss/core@0.51.12:
     resolution: {integrity: sha512-H8mLy6ZKu9nGZe5jlHhLPIVwh2G3cCDSBGl5aIZJFI1qpmDC+Zb3iueBGigNpX75IzkjaGKZiK1WUWq8TShjtA==}
+
+  /@unocss/core@0.52.0:
+    resolution: {integrity: sha512-MGyG1LpiVtyrHmWmXiDRnf7j+JaJua14K058FGBAhNSLaG37dG6xIfwPuVDBOqEI8EgICmNTJs1T/ImQJYWxtw==}
+    dev: false
 
   /@unocss/extractor-arbitrary-variants@0.51.12:
     resolution: {integrity: sha512-/HJH48LbnzTzPkq7yNf+F8tpq7F8b0ibuv0Y/PFQdRN+5OBpRoVwzK7pnJccpiOFbWqlfIQ/ao0MgVc+321tUw==}
