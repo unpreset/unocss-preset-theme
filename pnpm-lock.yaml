@@ -8,8 +8,8 @@ importers:
         specifier: ^0.51.12
         version: 0.51.12
       '@unocss/preset-mini':
-        specifier: ^0.51.12
-        version: 0.51.12
+        specifier: ^0.52.0
+        version: 0.52.0
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^0.38.6
@@ -1030,10 +1030,21 @@ packages:
   /@unocss/core@0.51.12:
     resolution: {integrity: sha512-H8mLy6ZKu9nGZe5jlHhLPIVwh2G3cCDSBGl5aIZJFI1qpmDC+Zb3iueBGigNpX75IzkjaGKZiK1WUWq8TShjtA==}
 
+  /@unocss/core@0.52.0:
+    resolution: {integrity: sha512-MGyG1LpiVtyrHmWmXiDRnf7j+JaJua14K058FGBAhNSLaG37dG6xIfwPuVDBOqEI8EgICmNTJs1T/ImQJYWxtw==}
+    dev: false
+
   /@unocss/extractor-arbitrary-variants@0.51.12:
     resolution: {integrity: sha512-/HJH48LbnzTzPkq7yNf+F8tpq7F8b0ibuv0Y/PFQdRN+5OBpRoVwzK7pnJccpiOFbWqlfIQ/ao0MgVc+321tUw==}
     dependencies:
       '@unocss/core': 0.51.12
+    dev: true
+
+  /@unocss/extractor-arbitrary-variants@0.52.0:
+    resolution: {integrity: sha512-wJ7a9NWVywHwjWMeB8wN9PHl0fhwOcvAgmhDkyY7A9wXSazaecSMLbKrcnQe7q5bOFGvn5jyxYkk78XZqLWgyg==}
+    dependencies:
+      '@unocss/core': 0.52.0
+    dev: false
 
   /@unocss/inspector@0.51.12:
     resolution: {integrity: sha512-FsdFMw3xxLgnk5vtvN78hGYdY5Vb5d5WZnPJBjTgH+dfH2PIqGHQu/TXK2wPvSyUbWJE6ilRKI5FsnoXmCwAGA==}
@@ -1077,6 +1088,14 @@ packages:
     dependencies:
       '@unocss/core': 0.51.12
       '@unocss/extractor-arbitrary-variants': 0.51.12
+    dev: true
+
+  /@unocss/preset-mini@0.52.0:
+    resolution: {integrity: sha512-P4mQimuZ+yLba2FN3+hKA7anBvjypmEgNof/LdPhTydv138zlhDVly7KlYADISt7QPNIVaGD3U34HLKtgyfBmQ==}
+    dependencies:
+      '@unocss/core': 0.52.0
+      '@unocss/extractor-arbitrary-variants': 0.52.0
+    dev: false
 
   /@unocss/preset-tagify@0.51.12:
     resolution: {integrity: sha512-EP9D7UFywSVD4oKikZ9AkBJ+J8oOUCEmgkK8FiGsoRs5Wy60QMKw0VSA9S2LsSJBFvw+8y4UJWqXVrm/PJ1AuA==}
