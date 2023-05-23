@@ -8,8 +8,7 @@
   "homepage": "https://github.com/Dunqing/unocss-preset-theme#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Dunqing/unocss-preset-theme.git",
-    "directory": "packages/preset-theme"
+    "url": "git+https://github.com/Dunqing/unocss-preset-theme.git"
   },
   "bugs": {
     "url": "https://github.com/Dunqing/unocss-preset-theme/issues"
