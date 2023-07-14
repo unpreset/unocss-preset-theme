@@ -10,7 +10,7 @@ interface Selectors {
   [themeName: string]: string
 }
 
-export interface PresetThemeOptions<Theme extends {}> {
+export interface PresetThemeOptions<Theme extends Record<string, any>> {
   /**
    * Multiple themes
    */
@@ -31,14 +31,14 @@ export interface PresetThemeOptions<Theme extends {}> {
  * @deprecated use `PresetThemeOptions` instead
  * @see PresetThemeOptions
  */
-export type PresetTheme<Theme extends {}> = PresetThemeOptions<Theme>
+export type PresetTheme<Theme extends Record<string, any>> = PresetThemeOptions<Theme>
 
 interface ThemeValue {
   theme: Record<string, Record<string, string>>
   name: string
 }
 
-export function presetTheme<T extends {}>(options: PresetThemeOptions<T>): Preset<T> {
+export function presetTheme<T extends Record<string, any>>(options: PresetThemeOptions<T>): Preset<T> {
   const { prefix = '--un-preset-theme', theme } = options
   const selectors: Selectors = { light: ':root', ...options.selectors }
   if (!theme.light)
