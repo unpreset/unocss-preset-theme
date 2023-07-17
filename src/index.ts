@@ -16,6 +16,10 @@ export interface PresetThemeOptions<Theme extends Record<string, any>> {
    */
   theme: Record<string, Theme>
   /**
+   * Themes for different media queries
+   */
+  mediaThemes?: Record<string, Theme>
+  /**
    * The prefix of the generated css variables
    * @default --un-preset-theme
    */
@@ -38,8 +42,17 @@ interface ThemeValue {
   name: string
 }
 
+const defaultBreakpoints = {
+  'sm': '640px',
+  'md': '768px',
+  'lg': '1024px',
+  'xl': '1280px',
+  '2xl': '1536px',
+
+}
+
 export function presetTheme<T extends Record<string, any>>(options: PresetThemeOptions<T>): Preset<T> {
-  const { prefix = '--un-preset-theme', theme } = options
+  const { prefix = '--un-preset-theme', theme, mediaThemes = {} } = options
   const selectors: Selectors = { light: ':root', ...options.selectors }
   if (!theme.light)
     theme.light = {} as T
@@ -151,26 +164,34 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
       {
         layer: 'theme',
         async getCSS(context) {
-          const { css } = await context.generator.generate(
-            // Add Date.now() to avoid cache
-            keys.map(key => `${defaultThemeNames.includes(key) ? `${key}:` : ''}${PRESET_THEME_RULE}:${key}:${Date.now()}`),
-            { preflights: false },
-          )
-          return css.split('\n').slice(1).map((line, index, lines) => {
-            const prevLine = index > 0 ? lines[index - 1] : ''
-            if (prevLine.includes('@media')) {
-              // convert .light{} to :root{}
-              line = line.replace(/.*?{/, ':root{')
+          let cssOutput = ''
+          for (const key of keys) {
+            const { css } = await context.generator.generate(
+              `${defaultThemeNames.includes(key) ? `${key}:` : ''}${PRESET_THEME_RULE}:${key}:${Date.now()}`,
+              { preflights: false },
+            )
+            const cssLines = css.split('\n').slice(1)
+            for (const mediaKey of Object.keys(mediaThemes)) {
+              const mediaCssLines = cssLines.map((line) => {
+                const prevLine = cssLines[cssLines.indexOf(line) - 1] || ''
+                if (prevLine.includes('@media')) {
+                  // convert .light{} to :root{}
+                  line = line.replace(/.*?{/, ':root{')
+                }
+                else {
+                  // convert .light .themename{} to .themename{}
+                  line = line.replace(/\..*?\s(.*\{)/, '$1')
+                }
+                return `@media (min-width: ${(defaultBreakpoints as any)[mediaKey]}) { ${line} }`
+              }).join('\n')
+              cssOutput += mediaCssLines
             }
-            else {
-              // convert .light .themename{} to .themename{}
-              line = line.replace(/\..*?\s(.*\{)/, '$1')
-            }
-            return line
-          }).join('\n')
+          }
+          return cssOutput
         },
       },
     ],
+
     postprocess(util) {
       util.entries.forEach(([, val]) => {
         if (typeof val === 'string') {
