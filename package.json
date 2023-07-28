@@ -47,7 +47,7 @@
     "@unocss/core": ">= 0.52.0"
   },
   "dependencies": {
-    "@unocss/core": "^0.53.5",
+    "@unocss/core": "^0.54.0",
     "@unocss/preset-mini": "^0.53.5"
   },
   "devDependencies": {
