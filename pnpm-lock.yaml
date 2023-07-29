@@ -43,8 +43,8 @@ importers:
   playground:
     dependencies:
       '@unocss/reset':
-        specifier: ^0.53.5
-        version: 0.53.5
+        specifier: ^0.54.0
+        version: 0.54.0
       vue:
         specifier: ^3.3.4
         version: 3.3.4
@@ -57,7 +57,7 @@ importers:
         version: 5.1.6
       unocss:
         specifier: ^0.53.5
-        version: 0.53.5(postcss@8.4.23)(rollup@3.20.2)(vite@4.4.4)
+        version: 0.53.5(postcss@8.4.26)(rollup@3.20.2)(vite@4.4.4)
       unocss-preset-theme:
         specifier: workspace:*
         version: link:..
@@ -1318,7 +1318,7 @@ packages:
       sirv: 2.0.3
     dev: true
 
-  /@unocss/postcss@0.53.5(postcss@8.4.23):
+  /@unocss/postcss@0.53.5(postcss@8.4.26):
     resolution: {integrity: sha512-IfZl4GxrpegP/861bp3e0X3VcQJ9/M3VxC9UQ7zzxkOz/E8R09iMpbnznVLrTiLp2r96p5k/ggXLoadFm1FxGA==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -1329,7 +1329,7 @@ packages:
       css-tree: 2.3.1
       fast-glob: 3.3.0
       magic-string: 0.30.1
-      postcss: 8.4.23
+      postcss: 8.4.26
     dev: true
 
   /@unocss/preset-attributify@0.53.5:
@@ -1391,6 +1391,11 @@ packages:
 
   /@unocss/reset@0.53.5:
     resolution: {integrity: sha512-tH8K4jw76mbWA67UUHKV6zxiwOsiG+byrHoG3lz8hr+cm6OgEJ3WjNNp7dZINmr7S7ylWO6igbxGQpsAuIQZCw==}
+    dev: true
+
+  /@unocss/reset@0.54.0:
+    resolution: {integrity: sha512-zxvr96hVsmvJtxCLatLSCc67RBEgqvVDhEtkIFxIz5oCJzxvipJTGdKxM4F6Akyzx1A+q7zM8dimqvmC6D5Idw==}
+    dev: false
 
   /@unocss/scope@0.53.5:
     resolution: {integrity: sha512-KBwemWNJIbu3+BWp0X4o5ERN0/nzF7hXBnjYNSb0s8phrydC6oJrp52XYlIHHTe7O4KzwkqGgf/xOMXMFpviDg==}
@@ -4430,7 +4435,7 @@ packages:
     engines: {node: '>= 10.0.0'}
     dev: true
 
-  /unocss@0.53.5(postcss@8.4.23)(rollup@3.20.2)(vite@4.4.4):
+  /unocss@0.53.5(postcss@8.4.26)(rollup@3.20.2)(vite@4.4.4):
     resolution: {integrity: sha512-LXAdtzAaH8iEDWxW4t9i6TvJNw0OSrgdN+jw8rAZAWb73Nx51ZLoKPUB1rFvQMr2Li7LcsUj5hYpOrQbhhafYg==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -4443,7 +4448,7 @@ packages:
       '@unocss/cli': 0.53.5(rollup@3.20.2)
       '@unocss/core': 0.53.5
       '@unocss/extractor-arbitrary-variants': 0.53.5
-      '@unocss/postcss': 0.53.5(postcss@8.4.23)
+      '@unocss/postcss': 0.53.5(postcss@8.4.26)
       '@unocss/preset-attributify': 0.53.5
       '@unocss/preset-icons': 0.53.5
       '@unocss/preset-mini': 0.53.5
@@ -4645,7 +4650,7 @@ packages:
       espree: 9.5.2
       esquery: 1.5.0
       lodash: 4.17.21
-      semver: 7.5.1
+      semver: 7.5.4
     transitivePeerDependencies:
       - supports-color
     dev: true
