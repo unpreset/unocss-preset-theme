@@ -87,10 +87,14 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
           else if (typeof val === 'string') {
             const name = [prefix, ...themeKeys].join('-')
             if (themeKeys[0] === 'colors') {
-              const cssColor = parseCssColor(val)
-              if (cssColor) {
+              const cssColor = parseCssColor(val) || val
+              if (typeof cssColor !== 'string') {
                 setThemeValue(name, 0, true)
                 curTheme[key] = wrapCSSFunction(cssColor.type, wrapVar(name), cssColor?.alpha)
+              }
+              else {
+                setThemeValue(name, 0, true)
+                curTheme[key] = wrapVar(name)
               }
             }
             else {
