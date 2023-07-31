@@ -167,6 +167,10 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
               line = line.replace(/\..*?\s(.*\{)/, '$1')
             }
             return line
+          }).sort((a, b) => {
+            if (a.match(/^:root|^@media|^\}/)?.length)
+              return b.match(/^:root|^@media|^\}/)?.length ? 0 : -1
+            return 1
           }).join('\n')
         },
       },
