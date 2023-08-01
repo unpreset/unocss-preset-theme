@@ -168,8 +168,9 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
             }
             return line
           }).sort((a, b) => {
-            if (a.match(/^:root|^@media|^\}/)?.length)
-              return b.match(/^:root|^@media|^\}/)?.length ? 0 : -1
+            const regexStr = `^${selectors.light}|^@media|^}`
+            if (a.match(regexStr)?.length)
+              return b.match(regexStr)?.length ? 0 : -1
             return 1
           }).join('\n')
         },
