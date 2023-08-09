@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@unocss/core':
-        specifier: ^0.54.1
-        version: 0.54.1
+        specifier: ^0.55.0
+        version: 0.55.0
       '@unocss/preset-mini':
         specifier: ^0.54.1
         version: 0.54.1
@@ -1330,6 +1330,10 @@ packages:
   /@unocss/core@0.54.1:
     resolution: {integrity: sha512-lbwvGD91liMNEZs3jwXxLrIHIn/J4dkJpeKdosRdm1xObqrkg0+Zx1fVn6X+GOX74yvjQlzbu/ODZEXFQC3mGw==}
 
+  /@unocss/core@0.55.0:
+    resolution: {integrity: sha512-TcTugpuhsv6OwMsP3iFIG8FVc9N5JzkojIGNAKF8I2WBftZ//3QcpEHiHc1mH3MlPYfJgUvCcT6/Gad55qmHzg==}
+    dev: false
+
   /@unocss/extractor-arbitrary-variants@0.54.1:
     resolution: {integrity: sha512-4bV0DbDxECihtUbP1UUIXkzSqOkDQ4vJG4VVmKcWbhSMXoRhuOCRkF7j+b9yaDJQtwTfnYgQws0kZFx6jlCVjg==}
     dependencies:
@@ -2202,7 +2206,7 @@ packages:
     dependencies:
       debug: 3.2.7
       is-core-module: 2.12.1
-      resolve: 1.22.2
+      resolve: 1.22.3
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3385,7 +3389,7 @@ packages:
     resolution: {integrity: sha512-/5CMN3T0R4XTj4DcGaexo+roZSdSFW/0AOOTROrjxzCG1wrWXEsGbRKevjlIL+ZDE4sZlJr5ED4YW0yqmkK+eA==}
     dependencies:
       hosted-git-info: 2.8.9
-      resolve: 1.22.2
+      resolve: 1.22.3
       semver: 5.7.1
       validate-npm-package-license: 3.0.4
     dev: true
