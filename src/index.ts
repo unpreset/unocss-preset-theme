@@ -160,23 +160,28 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
             keys.map(key => `${defaultThemeNames.includes(key) ? `${key}:` : ''}${PRESET_THEME_RULE}:${key}:${Date.now()}`),
             { preflights: false },
           )
-          return css.split('\n').slice(1).map((line, index, lines) => {
-            const prevLine = index > 0 ? lines[index - 1] : ''
-            if (prevLine.includes('@media')) {
+          const res = css
+            .replace(/,\n/g, ',')
+            .split('\n')
+            .slice(1).map((line, index, lines) => {
+              const prevLine = index > 0 ? lines[index - 1] : ''
+              if (prevLine.includes('@media')) {
               // convert .light{} to :root{}
-              line = line.replace(/.*?{/, ':root{')
-            }
-            else {
-              // convert .light .themename{} to .themename{}
-              line = line.replace(/\..*?\s(.*\{)/, '$1')
-            }
-            return line
-          }).sort((a, b) => {
-            const regexStr = `^${selectors.light}|^@media|^}`
-            if (a.match(regexStr)?.length)
-              return b.match(regexStr)?.length ? 0 : -1
-            return 1
-          }).join('\n')
+                line = line.replace(/.*?{/, ':root{')
+              }
+              else {
+                // convert .light .themename{} to .themename{}
+                line = line.replace(/(\.\w+)+\s([\.\:\w]+)/g, '$2')
+              }
+              return line
+            }).sort((a, b) => {
+              const regexStr = `^${selectors.light}|^@media|^}`
+              if (a.match(regexStr)?.length)
+                return b.match(regexStr)?.length ? 0 : -1
+              return 1
+            }).join('\n')
+
+          return res
         },
       },
     ],
