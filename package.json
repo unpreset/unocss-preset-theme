@@ -47,17 +47,17 @@
     "@unocss/core": ">= 0.52.0"
   },
   "dependencies": {
-    "@unocss/core": "^0.54.1",
-    "@unocss/preset-mini": "^0.54.1"
+    "@unocss/core": "^0.55.0",
+    "@unocss/preset-mini": "^0.55.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.39.8",
-    "@types/node": "^20.4.5",
-    "@unocss/preset-uno": "^0.54.1",
+    "@antfu/eslint-config": "^0.40.2",
+    "@types/node": "^20.5.0",
+    "@unocss/preset-uno": "^0.55.0",
     "bumpp": "^9.1.1",
-    "eslint": "^8.46.0",
+    "eslint": "^8.47.0",
     "typescript": "^5.1.6",
     "unbuild": "^1.2.1",
-    "vitest": "^0.33.0"
+    "vitest": "^0.34.1"
   }
 }
