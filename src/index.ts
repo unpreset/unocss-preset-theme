@@ -165,13 +165,14 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
             .split('\n')
             .slice(1).map((line, index, lines) => {
               const prevLine = index > 0 ? lines[index - 1] : ''
+              console.log(line)
               if (prevLine.includes('@media')) {
               // convert .light{} to :root{}
                 line = line.replace(/.*?{/, ':root{')
               }
               else {
                 // convert .light .themename{} to .themename{}
-                line = line.replace(/(\.\w+)+\s([\.\:\w]+)/g, '$2')
+                line = line.replace(/(\.\w+)+\s([\.\:\w\[\-="\]]+)/g, '$2')
               }
               return line
             }).sort((a, b) => {
