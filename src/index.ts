@@ -165,7 +165,6 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
             .split('\n')
             .slice(1).map((line, index, lines) => {
               const prevLine = index > 0 ? lines[index - 1] : ''
-              console.log(line)
               if (prevLine.includes('@media')) {
               // convert .light{} to :root{}
                 line = line.replace(/.*?{/, ':root{')
