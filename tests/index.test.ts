@@ -357,7 +357,7 @@ describe('theme', () => {
           selectors: {
             light: '[data-theme="light"]',
             dark: '[data-theme="dark"]',
-            test: '.test'
+            test: '.test',
           },
           theme: {
             dark: {
@@ -368,9 +368,9 @@ describe('theme', () => {
             },
             test: {
               colors: {
-                primary: "#123123"
-              }
-            }
+                primary: '#123123',
+              },
+            },
           },
         }),
       ],
