@@ -171,7 +171,7 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
               }
               else {
                 // convert .light .themename{} to .themename{}
-                line = line.replace(/(\.\w+)+\s([\.\:\w]+)/g, '$2')
+                line = line.replace(/(\.\w+)+\s([\.\:\w\[\-="\]]+)/g, '$2')
               }
               return line
             }).sort((a, b) => {
