@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "@unocss/core": "^0.56.0",
-    "@unocss/preset-mini": "^0.56.0"
+    "@unocss/rule-utils": "^0.56.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.43.0",

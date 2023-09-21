@@ -1,6 +1,6 @@
 import type { Preset } from '@unocss/core'
 import { mergeDeep } from '@unocss/core'
-import { parseCssColor } from '@unocss/preset-mini/utils'
+import { parseCssColor } from '@unocss/rule-utils'
 import { getThemeVal, wrapCSSFunction, wrapVar } from './helpers'
 
 const defaultThemeNames = ['dark', 'light']

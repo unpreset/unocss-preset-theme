@@ -11,7 +11,7 @@ importers:
       '@unocss/core':
         specifier: ^0.56.0
         version: 0.56.0
-      '@unocss/preset-mini':
+      '@unocss/rule-utils':
         specifier: ^0.56.0
         version: 0.56.0
     devDependencies:
@@ -1584,6 +1584,7 @@ packages:
     resolution: {integrity: sha512-OtdDsief0sqzYkS0GH9+LYUWojOjisjYjk5nLBI9lMfU23l/G76T2BzN8/W19MjUEs80relP4nO/ruefJn0hvw==}
     dependencies:
       '@unocss/core': 0.56.0
+    dev: true
 
   /@unocss/inspector@0.56.0:
     resolution: {integrity: sha512-YGIyDe0eDzf0XhIHZRxZFV4xGKIA8jGBQ/rOF9k32Z8hyJ3jdJYf7s/ckA6s1kYxFq4qFmznylWeuh8JSUHeMg==}
@@ -1629,6 +1630,7 @@ packages:
       '@unocss/core': 0.56.0
       '@unocss/extractor-arbitrary-variants': 0.56.0
       '@unocss/rule-utils': 0.56.0
+    dev: true
 
   /@unocss/preset-tagify@0.56.0:
     resolution: {integrity: sha512-8FBHa+yPEFQ26BcqgBUrlLX7ThoMPRbH2AjQCk0RpgVhhy6OBweOFXmE0FhcOpNnM6DJadA6vlp3bTXZ0epqVA==}
@@ -2585,7 +2587,7 @@ packages:
       eslint: 8.49.0
       eslint-import-resolver-node: 0.3.7
       eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.7.2)(eslint-import-resolver-node@0.3.7)(eslint@8.49.0)
-      get-tsconfig: 4.6.2
+      get-tsconfig: 4.7.0
       is-glob: 4.0.3
       minimatch: 3.1.2
       resolve: 1.22.3
@@ -3014,12 +3016,6 @@ packages:
   /get-stream@6.0.1:
     resolution: {integrity: sha512-ts6Wi+2j3jQjqi70w5AlN8DFnkSwC+MqmxEzdEALB2qXZYV3X/b1CTfgPLGJNMeAWxdPfU8FO1ms3NUfaHCPYg==}
     engines: {node: '>=10'}
-    dev: true
-
-  /get-tsconfig@4.6.2:
-    resolution: {integrity: sha512-E5XrT4CbbXcXWy+1jChlZmrmCwd5KGx502kDCXJJ7y898TtWW9FwoG5HfOLVRKmlmDGkWN2HM9Ho+/Y8F0sJDg==}
-    dependencies:
-      resolve-pkg-maps: 1.0.0
     dev: true
 
   /get-tsconfig@4.7.0:
