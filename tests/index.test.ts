@@ -29,7 +29,7 @@ describe('theme', () => {
       presetUno(options.unoOptions),
       presetTheme<Theme>(mergeDeep({
         theme: {
-          dark: {
+          'dark': {
             colors: {
               main: {
                 100: '#fffff1',
@@ -43,13 +43,13 @@ describe('theme', () => {
               },
             },
           },
-          compact: {
+          'compact': {
             fontSize: {
               xs: ['1.75rem', '2rem'],
               sm: ['1.875rem', '2.25rem'],
             },
           },
-          star: {
+          'starry-night': {
             colors: {
               main: {
                 100: '#1ffff1',
@@ -87,7 +87,7 @@ describe('theme', () => {
       :root{--un-preset-theme-colors-main-100:0, 0, 1;--un-preset-theme-colors-main-500:0, 0, 4;--un-preset-theme-colors-main-200:0, 0, 2;--un-preset-theme-fontSize-sm-0:0.875rem;--un-preset-theme-fontSize-sm-1:0.875rem;--un-preset-theme-fontSize-xs-0:0.75rem;--un-preset-theme-fontSize-xs-1:0.75rem;}
       .compact{--un-preset-theme-fontSize-sm-0:1.875rem;--un-preset-theme-fontSize-sm-1:2.25rem;--un-preset-theme-fontSize-xs-0:1.75rem;--un-preset-theme-fontSize-xs-1:2rem;}
       .dark{--un-preset-theme-colors-main-100:255, 255, 241;--un-preset-theme-colors-main-500:255, 255, 244;--un-preset-theme-colors-main-200:255, 255, 242;}
-      .star{--un-preset-theme-colors-main-100:31, 255, 241;--un-preset-theme-colors-main-500:31, 255, 244;--un-preset-theme-colors-main-200:31, 255, 242;}
+      .starry-night{--un-preset-theme-colors-main-100:31, 255, 241;--un-preset-theme-colors-main-500:31, 255, 244;--un-preset-theme-colors-main-200:31, 255, 242;}
       /* layer: default */
       .border-main-500{--un-border-opacity:1;border-color:rgba(var(--un-preset-theme-colors-main-500),var(--un-border-opacity));}
       .bg-main-200{--un-bg-opacity:1;background-color:rgba(var(--un-preset-theme-colors-main-200),var(--un-bg-opacity));}
