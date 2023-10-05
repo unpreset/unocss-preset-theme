@@ -2,7 +2,7 @@ import type { UserConfig } from '@unocss/core'
 import { createGenerator, mergeDeep } from '@unocss/core'
 import { presetUno } from '@unocss/preset-uno'
 import type { PresetUnoOptions, Theme } from '@unocss/preset-uno'
-import { describe, expect, test } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import type { PresetThemeOptions } from '../src'
 import presetTheme from '../src'
 
@@ -68,7 +68,7 @@ describe('theme', () => {
     ],
   } as UserConfig<Theme>, userConfig as UserConfig<Theme>))
 
-  test('basic', async () => {
+  it('basic', async () => {
     const targets = [
       'text-main-100',
       'bg-main-200',
@@ -96,7 +96,7 @@ describe('theme', () => {
       .text-main-100{--un-text-opacity:1;color:rgba(var(--un-preset-theme-colors-main-100),var(--un-text-opacity));}"
     `)
   })
-  test('media dark mode', async () => {
+  it('media dark mode', async () => {
     const uno = createGenerator({
       theme: {
         colors: {
@@ -145,7 +145,7 @@ describe('theme', () => {
       .text-primary{--un-text-opacity:1;color:rgba(var(--un-preset-theme-colors-primary),var(--un-text-opacity));}"
     `)
   })
-  test('selectors', async () => {
+  it('selectors', async () => {
     const uno = createGenerator({
       theme: {
         colors: {
@@ -183,7 +183,7 @@ describe('theme', () => {
     `)
   })
 
-  test('color opacity', async () => {
+  it('color opacity', async () => {
     const uno = createUno({
       theme: {
         colors: {
@@ -227,7 +227,7 @@ describe('theme', () => {
     `)
   })
 
-  test('spacing', async () => {
+  it('spacing', async () => {
     const uno = createUno({}, {
       themeOptions: {
         theme: {
@@ -263,7 +263,7 @@ describe('theme', () => {
     `)
   })
 
-  test('color-keyword-and-custom-vars', async () => {
+  it('color-keyword-and-custom-vars', async () => {
     const uno = createGenerator({
       theme: {
         colors: {
@@ -302,7 +302,7 @@ describe('theme', () => {
     `)
   })
 
-  test('all theme use same selector content', async () => {
+  it('all theme use same selector content', async () => {
     const uno = createGenerator({
       presets: [
         presetUno(),
@@ -343,7 +343,7 @@ describe('theme', () => {
     `)
   })
 
-  test('custom-selectors', async () => {
+  it('custom-selectors', async () => {
     const uno = createGenerator({
       theme: {
         colors: {
