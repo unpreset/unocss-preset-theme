@@ -10,7 +10,10 @@ export function wrapRGBA(v: string, alpha?: string | number) {
 }
 
 export function wrapCSSFunction(name: string, v: string, alpha: string | number | undefined) {
-  return `${name}(${alpha !== undefined ? [v, alpha].join(name.includes('rgb') ? ',' : ' ') : v})`
+  if (name[name.length - 1] === 'a')
+    name = name.slice(0, -1)
+
+  return `${name}(${[v, alpha].filter(value => value !== undefined).join('/')})`
 }
 
 export function getThemeVal(theme: any, keys: string[], index = 0) {

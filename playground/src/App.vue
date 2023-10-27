@@ -15,25 +15,20 @@ const onCompact: any = () => {
 </script>
 
 <template>
-  <div
-    :class="{
-      dark: theme.dark,
-      compact: theme.compact,
-    }"
-    class="font-sans w-screen h-screen bg-container flex flex-col items-center px-2 "
-  >
+  <div :class="{
+    dark: theme.dark,
+    compact: theme.compact,
+  }" class="font-sans w-screen h-screen bg-container flex flex-col items-center px-2 ">
     <div class="flex flex-col sm:w-md w-full mt-40 border-2 border-color-border rounded-md px-xl py-lg">
       <div class="flex gap-x-4 ">
         <button
           class="text-base rounded-md px-base text-text py-xs border-color-border border-1 hover:border-primary-border hover:text-primary"
-          @click="onTheme"
-        >
+          @click="onTheme">
           {{ theme.dark ? 'light' : 'dark' }}
         </button>
         <button
           class="text-base rounded-md px-base text-text py-xs border-color-border border-1 hover:border-primary-border hover:text-primary"
-          @click="onCompact"
-        >
+          @click="onCompact">
           {{ theme.compact ? 'loose' : 'compact' }}
         </button>
       </div>
@@ -49,11 +44,9 @@ const onCompact: any = () => {
           The color opacity is 0.5
         </p>
       </div>
-      <p>You can see all the css in <span class="font-bold">Devtools</span></p>
+      <p class="text-text">You can see all the css in <span class="font-bold">Devtools</span></p>
     </div>
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

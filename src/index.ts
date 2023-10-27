@@ -64,7 +64,7 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
                   if (isColor) {
                     const cssColor = parseCssColor(themeValue)
                     if (cssColor?.components)
-                      themeValue = cssColor.components.join(', ')
+                      themeValue = cssColor.components.join(' ')
                   }
                   obj[key] = {
                     [name]: themeValue,
@@ -86,20 +86,13 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
           }
           else if (typeof val === 'string') {
             const name = [prefix, ...themeKeys].join('-')
-            if (themeKeys[0] === 'colors') {
+            const isColor = themeKeys[0] === 'colors'
+            setThemeValue(name, 0, isColor)
+            curTheme[key] = wrapVar(name)
+            if (isColor) {
               const cssColor = parseCssColor(val) || val
-              if (typeof cssColor !== 'string') {
-                setThemeValue(name, 0, true)
-                curTheme[key] = wrapCSSFunction(cssColor.type, wrapVar(name), cssColor?.alpha)
-              }
-              else {
-                setThemeValue(name, 0, true)
-                curTheme[key] = wrapVar(name)
-              }
-            }
-            else {
-              setThemeValue(name, 0)
-              curTheme[key] = wrapVar(name)
+              if (typeof cssColor !== 'string')
+                curTheme[key] = wrapCSSFunction(cssColor.type, curTheme[key], cssColor?.alpha)
             }
           }
           else {
