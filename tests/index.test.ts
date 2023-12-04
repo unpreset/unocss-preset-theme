@@ -434,6 +434,7 @@ describe("theme", () => {
           },
         }),
       ],
+      safelist: ["md:text-xs"],
     });
 
     const targets = ["md:text-primary", "dark:text-color-key", "md:text-xs"];
@@ -445,6 +446,9 @@ describe("theme", () => {
       :root{--un-preset-theme-colors-primary:18 52 86;--un-preset-theme-fontSize-xs-0:1.75rem;--un-preset-theme-fontSize-xs-1:1.75rem;--un-preset-theme-colors-colorKey:red;}
       .dark{--un-preset-theme-colors-primary:101 67 33;--un-preset-theme-colors-colorKey:blue;}
       .test{--un-preset-theme-colors-primary:18 49 35;--un-preset-theme-fontSize-xs-0:0.75rem;--un-preset-theme-fontSize-xs-1:1rem;}
+      @media (min-width: 768px){
+      .md\\\\:text-xs{font-size:var(--un-preset-theme-fontSize-xs-0);line-height:var(--un-preset-theme-fontSize-xs-1);}
+      }
       /* layer: default */
       .dark .dark\\\\:text-color-key{color:var(--un-preset-theme-colors-colorKey);}
       @media (min-width: 768px){
