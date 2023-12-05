@@ -58,23 +58,26 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
 
           const setThemeValue = (name: string, index = 0, isColor = false) => {
             themeValues.set(name, {
-              theme: keys.reduce((obj, key) => {
-                let themeValue
-                  = getThemeVal(theme[key], themeKeys, index)
-                  || (key === 'light' ? getThemeVal(originalTheme, themeKeys) : null)
-                if (themeValue) {
-                  if (isColor) {
-                    const cssColor = parseCssColor(themeValue)
-                    if (cssColor?.components)
-                      themeValue = cssColor.components.join(' ')
+              theme: keys.reduce(
+                (obj, key) => {
+                  let themeValue
+                    = getThemeVal(theme[key], themeKeys, index)
+                    || (key === 'light' ? getThemeVal(originalTheme, themeKeys) : null)
+                  if (themeValue) {
+                    if (isColor) {
+                      const cssColor = parseCssColor(themeValue)
+                      if (cssColor?.components)
+                        themeValue = cssColor.components.join(' ')
+                    }
+                    obj[key] = {
+                      [name]: themeValue,
+                    }
                   }
-                  obj[key] = {
-                    [name]: themeValue,
-                  }
-                }
 
-                return obj
-              }, {} as ThemeValue['theme']),
+                  return obj
+                },
+                {} as ThemeValue['theme'],
+              ),
               name,
             })
           }
@@ -202,9 +205,6 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
               )
               const replacedLine = line.replace(regexStr, (matchStr, ...params) => {
                 const matchGroup = params.slice(0, -2)
-                // const matchIndex = params[params.length - 2];
-                // const input = params[params.length - 1];
-                // console.log(regexStr, matchStr, matchGroup, matchIndex, input);
                 let replacement = ''
                 for (let i = 0; i < matchGroup.length / 5; i++) {
                   const startIndex = i * 5
