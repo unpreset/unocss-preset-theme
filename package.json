@@ -48,13 +48,13 @@
     "@unocss/core": ">= 0.52.0"
   },
   "dependencies": {
-    "@unocss/core": "^0.57.1",
-    "@unocss/rule-utils": "^0.57.1"
+    "@unocss/core": "^0.58.0",
+    "@unocss/rule-utils": "^0.58.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^1.0.0-beta.29",
     "@types/node": "^20.8.9",
-    "@unocss/preset-uno": "^0.57.1",
+    "@unocss/preset-uno": "^0.58.0",
     "bumpp": "^9.2.0",
     "eslint": "^8.52.0",
     "typescript": "^5.2.2",
