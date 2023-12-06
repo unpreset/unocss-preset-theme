@@ -7,76 +7,83 @@ import type { PresetThemeOptions } from '../src'
 import presetTheme from '../src'
 
 describe('theme', () => {
-  const createUno = (userConfig?: UserConfig<Theme>, options: {
-    unoOptions?: PresetUnoOptions
-    themeOptions?: PresetThemeOptions<Theme>
-  } = {}) => createGenerator<Theme>(mergeDeep({
-    theme: {
-      colors: {
-        main: {
-          100: '#000001',
-          200: '#000002',
-          300: '#000003',
-          400: '#000004',
-          500: '#000004',
-          600: '#000006',
-          700: '#000007',
-          800: '#000008',
-        },
-      },
-    },
-    presets: [
-      presetUno(options.unoOptions),
-      presetTheme<Theme>(mergeDeep({
-        theme: {
-          'dark': {
+  const createUno = (
+    userConfig?: UserConfig<Theme>,
+    options: {
+      unoOptions?: PresetUnoOptions
+      themeOptions?: PresetThemeOptions<Theme>
+    } = {},
+  ) =>
+    createGenerator<Theme>(
+      mergeDeep(
+        {
+          theme: {
             colors: {
               main: {
-                100: '#fffff1',
-                200: '#fffff2',
-                300: '#fffff3',
-                400: '#fffff4',
-                500: '#fffff4',
-                600: '#fffff6',
-                700: '#fffff7',
-                800: '#fffff8',
+                100: '#000001',
+                200: '#000002',
+                300: '#000003',
+                400: '#000004',
+                500: '#000004',
+                600: '#000006',
+                700: '#000007',
+                800: '#000008',
               },
             },
           },
-          'compact': {
-            fontSize: {
-              xs: ['1.75rem', '2rem'],
-              sm: ['1.875rem', '2.25rem'],
-            },
-          },
-          'starry-night': {
-            colors: {
-              main: {
-                100: '#1ffff1',
-                200: '#1ffff2',
-                300: '#1ffff3',
-                400: '#1ffff4',
-                500: '#1ffff4',
-                600: '#1ffff6',
-                700: '#1ffff7',
-                800: '#1ffff8',
-              },
-            },
-          },
-        },
-      }, options.themeOptions as any)),
-    ],
-  } as UserConfig<Theme>, userConfig as UserConfig<Theme>))
+          presets: [
+            presetUno(options.unoOptions),
+            presetTheme<Theme>(
+              mergeDeep(
+                {
+                  theme: {
+                    'dark': {
+                      colors: {
+                        main: {
+                          100: '#fffff1',
+                          200: '#fffff2',
+                          300: '#fffff3',
+                          400: '#fffff4',
+                          500: '#fffff4',
+                          600: '#fffff6',
+                          700: '#fffff7',
+                          800: '#fffff8',
+                        },
+                      },
+                    },
+                    'compact': {
+                      fontSize: {
+                        xs: ['1.75rem', '2rem'],
+                        sm: ['1.875rem', '2.25rem'],
+                      },
+                    },
+                    'starry-night': {
+                      colors: {
+                        main: {
+                          100: '#1ffff1',
+                          200: '#1ffff2',
+                          300: '#1ffff3',
+                          400: '#1ffff4',
+                          500: '#1ffff4',
+                          600: '#1ffff6',
+                          700: '#1ffff7',
+                          800: '#1ffff8',
+                        },
+                      },
+                    },
+                  },
+                },
+                options.themeOptions as any,
+              ),
+            ),
+          ],
+        } as UserConfig<Theme>,
+        userConfig as UserConfig<Theme>,
+      ),
+    )
 
   it('basic', async () => {
-    const targets = [
-      'text-main-100',
-      'bg-main-200',
-      'border-main-500',
-      'border-main-6',
-      'text-sm',
-      'text-xs',
-    ]
+    const targets = ['text-main-100', 'bg-main-200', 'border-main-500', 'border-main-6', 'text-sm', 'text-xs']
 
     const uno = createUno()
     const { css } = await uno.generate(targets.join('\n'))
@@ -133,12 +140,8 @@ describe('theme', () => {
       "/* layer: preflights */
       *,::before,::after{--un-rotate:0;--un-rotate-x:0;--un-rotate-y:0;--un-rotate-z:0;--un-scale-x:1;--un-scale-y:1;--un-scale-z:1;--un-skew-x:0;--un-skew-y:0;--un-translate-x:0;--un-translate-y:0;--un-translate-z:0;--un-pan-x: ;--un-pan-y: ;--un-pinch-zoom: ;--un-scroll-snap-strictness:proximity;--un-ordinal: ;--un-slashed-zero: ;--un-numeric-figure: ;--un-numeric-spacing: ;--un-numeric-fraction: ;--un-border-spacing-x:0;--un-border-spacing-y:0;--un-ring-offset-shadow:0 0 rgb(0 0 0 / 0);--un-ring-shadow:0 0 rgb(0 0 0 / 0);--un-shadow-inset: ;--un-shadow:0 0 rgb(0 0 0 / 0);--un-ring-inset: ;--un-ring-offset-width:0px;--un-ring-offset-color:#fff;--un-ring-width:0px;--un-ring-color:rgb(147 197 253 / 0.5);--un-blur: ;--un-brightness: ;--un-contrast: ;--un-drop-shadow: ;--un-grayscale: ;--un-hue-rotate: ;--un-invert: ;--un-saturate: ;--un-sepia: ;--un-backdrop-blur: ;--un-backdrop-brightness: ;--un-backdrop-contrast: ;--un-backdrop-grayscale: ;--un-backdrop-hue-rotate: ;--un-backdrop-invert: ;--un-backdrop-opacity: ;--un-backdrop-saturate: ;--un-backdrop-sepia: ;}::backdrop{--un-rotate:0;--un-rotate-x:0;--un-rotate-y:0;--un-rotate-z:0;--un-scale-x:1;--un-scale-y:1;--un-scale-z:1;--un-skew-x:0;--un-skew-y:0;--un-translate-x:0;--un-translate-y:0;--un-translate-z:0;--un-pan-x: ;--un-pan-y: ;--un-pinch-zoom: ;--un-scroll-snap-strictness:proximity;--un-ordinal: ;--un-slashed-zero: ;--un-numeric-figure: ;--un-numeric-spacing: ;--un-numeric-fraction: ;--un-border-spacing-x:0;--un-border-spacing-y:0;--un-ring-offset-shadow:0 0 rgb(0 0 0 / 0);--un-ring-shadow:0 0 rgb(0 0 0 / 0);--un-shadow-inset: ;--un-shadow:0 0 rgb(0 0 0 / 0);--un-ring-inset: ;--un-ring-offset-width:0px;--un-ring-offset-color:#fff;--un-ring-width:0px;--un-ring-color:rgb(147 197 253 / 0.5);--un-blur: ;--un-brightness: ;--un-contrast: ;--un-drop-shadow: ;--un-grayscale: ;--un-hue-rotate: ;--un-invert: ;--un-saturate: ;--un-sepia: ;--un-backdrop-blur: ;--un-backdrop-brightness: ;--un-backdrop-contrast: ;--un-backdrop-grayscale: ;--un-backdrop-hue-rotate: ;--un-backdrop-invert: ;--un-backdrop-opacity: ;--un-backdrop-saturate: ;--un-backdrop-sepia: ;}
       /* layer: theme */
-      @media (prefers-color-scheme: dark){
-      :root{--un-preset-theme-colors-primary:101 67 33;}
-      }
-      @media (prefers-color-scheme: light){
-      :root{--un-preset-theme-colors-primary:18 52 86;--un-preset-theme-fontSize-xs-0:1.75rem;--un-preset-theme-fontSize-xs-1:1.75rem;}
-      }
+      @media (prefers-color-scheme: dark){:root{--un-preset-theme-colors-primary:101 67 33;}}
+      @media (prefers-color-scheme: light){:root{--un-preset-theme-colors-primary:18 52 86;--un-preset-theme-fontSize-xs-0:1.75rem;--un-preset-theme-fontSize-xs-1:1.75rem;}}
       .compact{--un-preset-theme-fontSize-xs-0:0.75rem;--un-preset-theme-fontSize-xs-1:1rem;}
       /* layer: default */
       .text-xs{font-size:var(--un-preset-theme-fontSize-xs-0);line-height:var(--un-preset-theme-fontSize-xs-1);}
@@ -184,31 +187,36 @@ describe('theme', () => {
   })
 
   it('color opacity', async () => {
-    const uno = createUno({
-      theme: {
-        colors: {
-          rgb: 'rgb(255, 0, 0)',
-          rgba: 'rgba(255, 0, 0, 0.5)',
-          hsl: 'hsl(0, 100%, 50%)',
-          hsla: 'hsl(0, 100%, 50%, 0.5)',
+    const uno = createUno(
+      {
+        theme: {
+          colors: {
+            rgb: 'rgb(255, 0, 0)',
+            rgba: 'rgba(255, 0, 0, 0.5)',
+            hsl: 'hsl(0, 100%, 50%)',
+            hsla: 'hsl(0, 100%, 50%, 0.5)',
+          },
         },
       },
-    }, {
-      themeOptions: {
-        theme: {
-          dark: {
-            colors: {
-              rgb: 'rgb(0, 255, 0)',
-              rgba: 'rgba(0, 255, 0, 0.5)',
-              hsl: 'hsl(0, 100%, 50%)',
-              hsla: 'hsl(100, 100%, 50%, 0.5)',
+      {
+        themeOptions: {
+          theme: {
+            dark: {
+              colors: {
+                rgb: 'rgb(0, 255, 0)',
+                rgba: 'rgba(0, 255, 0, 0.5)',
+                hsl: 'hsl(0, 100%, 50%)',
+                hsla: 'hsl(100, 100%, 50%, 0.5)',
+              },
             },
           },
         },
       },
-    })
+    )
 
-    const { css } = await uno.generate('text-main text-rgb text-rgba text-rgb/40 text-rgba/50 text-hsl text-hsl/60 text-hsla text-hsla/60')
+    const { css } = await uno.generate(
+      'text-main text-rgb text-rgba text-rgb/40 text-rgba/50 text-hsl text-hsl/60 text-hsla text-hsla/60',
+    )
     expect(css).toMatchInlineSnapshot(`
       "/* layer: preflights */
       *,::before,::after{--un-rotate:0;--un-rotate-x:0;--un-rotate-y:0;--un-rotate-z:0;--un-scale-x:1;--un-scale-y:1;--un-scale-z:1;--un-skew-x:0;--un-skew-y:0;--un-translate-x:0;--un-translate-y:0;--un-translate-z:0;--un-pan-x: ;--un-pan-y: ;--un-pinch-zoom: ;--un-scroll-snap-strictness:proximity;--un-ordinal: ;--un-slashed-zero: ;--un-numeric-figure: ;--un-numeric-spacing: ;--un-numeric-fraction: ;--un-border-spacing-x:0;--un-border-spacing-y:0;--un-ring-offset-shadow:0 0 rgb(0 0 0 / 0);--un-ring-shadow:0 0 rgb(0 0 0 / 0);--un-shadow-inset: ;--un-shadow:0 0 rgb(0 0 0 / 0);--un-ring-inset: ;--un-ring-offset-width:0px;--un-ring-offset-color:#fff;--un-ring-width:0px;--un-ring-color:rgb(147 197 253 / 0.5);--un-blur: ;--un-brightness: ;--un-contrast: ;--un-drop-shadow: ;--un-grayscale: ;--un-hue-rotate: ;--un-invert: ;--un-saturate: ;--un-sepia: ;--un-backdrop-blur: ;--un-backdrop-brightness: ;--un-backdrop-contrast: ;--un-backdrop-grayscale: ;--un-backdrop-hue-rotate: ;--un-backdrop-invert: ;--un-backdrop-opacity: ;--un-backdrop-saturate: ;--un-backdrop-sepia: ;}::backdrop{--un-rotate:0;--un-rotate-x:0;--un-rotate-y:0;--un-rotate-z:0;--un-scale-x:1;--un-scale-y:1;--un-scale-z:1;--un-skew-x:0;--un-skew-y:0;--un-translate-x:0;--un-translate-y:0;--un-translate-z:0;--un-pan-x: ;--un-pan-y: ;--un-pinch-zoom: ;--un-scroll-snap-strictness:proximity;--un-ordinal: ;--un-slashed-zero: ;--un-numeric-figure: ;--un-numeric-spacing: ;--un-numeric-fraction: ;--un-border-spacing-x:0;--un-border-spacing-y:0;--un-ring-offset-shadow:0 0 rgb(0 0 0 / 0);--un-ring-shadow:0 0 rgb(0 0 0 / 0);--un-shadow-inset: ;--un-shadow:0 0 rgb(0 0 0 / 0);--un-ring-inset: ;--un-ring-offset-width:0px;--un-ring-offset-color:#fff;--un-ring-width:0px;--un-ring-color:rgb(147 197 253 / 0.5);--un-blur: ;--un-brightness: ;--un-contrast: ;--un-drop-shadow: ;--un-grayscale: ;--un-hue-rotate: ;--un-invert: ;--un-saturate: ;--un-sepia: ;--un-backdrop-blur: ;--un-backdrop-brightness: ;--un-backdrop-contrast: ;--un-backdrop-grayscale: ;--un-backdrop-hue-rotate: ;--un-backdrop-invert: ;--un-backdrop-opacity: ;--un-backdrop-saturate: ;--un-backdrop-sepia: ;}
@@ -228,23 +236,26 @@ describe('theme', () => {
   })
 
   it('spacing', async () => {
-    const uno = createUno({}, {
-      themeOptions: {
-        theme: {
-          dark: {
-            spacing: {
-              lg: '15px',
+    const uno = createUno(
+      {},
+      {
+        themeOptions: {
+          theme: {
+            dark: {
+              spacing: {
+                lg: '15px',
+              },
             },
-          },
-          compact: {
-            spacing: {
-              lg: '12px',
-              md: '10px',
+            compact: {
+              spacing: {
+                lg: '12px',
+                md: '10px',
+              },
             },
           },
         },
       },
-    })
+    )
     const { css } = await uno.generate('px-5 py-6 pt-7 pb-8 px-md p-lg')
     expect(css).toMatchInlineSnapshot(`
       "/* layer: preflights */
@@ -388,6 +399,62 @@ describe('theme', () => {
       /* layer: default */
       .text-color-key{color:var(--un-preset-theme-colors-colorKey);}
       .text-primary{--un-text-opacity:1;color:rgb(var(--un-preset-theme-colors-primary) / var(--un-text-opacity));}"
+    `)
+  })
+
+  it('breakpoints', async () => {
+    const uno = createGenerator({
+      theme: {
+        colors: {
+          primary: '#123456',
+          colorKey: 'red',
+        },
+        fontSize: {
+          xs: ['1.75rem', '2rem'],
+        },
+      },
+      presets: [
+        presetUno(),
+        presetTheme<Theme>({
+          theme: {
+            dark: {
+              colors: {
+                primary: '#654321',
+                colorKey: 'blue',
+              },
+            },
+            test: {
+              colors: {
+                primary: '#123123',
+              },
+              fontSize: {
+                xs: ['0.75rem', '1rem'],
+              },
+            },
+          },
+        }),
+      ],
+      safelist: ['md:text-xs'],
+    })
+
+    const targets = ['md:text-primary', 'dark:text-color-key', 'md:text-xs']
+    const { css } = await uno.generate(targets.join('\n'))
+    expect(css).toMatchInlineSnapshot(`
+      "/* layer: preflights */
+      *,::before,::after{--un-rotate:0;--un-rotate-x:0;--un-rotate-y:0;--un-rotate-z:0;--un-scale-x:1;--un-scale-y:1;--un-scale-z:1;--un-skew-x:0;--un-skew-y:0;--un-translate-x:0;--un-translate-y:0;--un-translate-z:0;--un-pan-x: ;--un-pan-y: ;--un-pinch-zoom: ;--un-scroll-snap-strictness:proximity;--un-ordinal: ;--un-slashed-zero: ;--un-numeric-figure: ;--un-numeric-spacing: ;--un-numeric-fraction: ;--un-border-spacing-x:0;--un-border-spacing-y:0;--un-ring-offset-shadow:0 0 rgb(0 0 0 / 0);--un-ring-shadow:0 0 rgb(0 0 0 / 0);--un-shadow-inset: ;--un-shadow:0 0 rgb(0 0 0 / 0);--un-ring-inset: ;--un-ring-offset-width:0px;--un-ring-offset-color:#fff;--un-ring-width:0px;--un-ring-color:rgb(147 197 253 / 0.5);--un-blur: ;--un-brightness: ;--un-contrast: ;--un-drop-shadow: ;--un-grayscale: ;--un-hue-rotate: ;--un-invert: ;--un-saturate: ;--un-sepia: ;--un-backdrop-blur: ;--un-backdrop-brightness: ;--un-backdrop-contrast: ;--un-backdrop-grayscale: ;--un-backdrop-hue-rotate: ;--un-backdrop-invert: ;--un-backdrop-opacity: ;--un-backdrop-saturate: ;--un-backdrop-sepia: ;}::backdrop{--un-rotate:0;--un-rotate-x:0;--un-rotate-y:0;--un-rotate-z:0;--un-scale-x:1;--un-scale-y:1;--un-scale-z:1;--un-skew-x:0;--un-skew-y:0;--un-translate-x:0;--un-translate-y:0;--un-translate-z:0;--un-pan-x: ;--un-pan-y: ;--un-pinch-zoom: ;--un-scroll-snap-strictness:proximity;--un-ordinal: ;--un-slashed-zero: ;--un-numeric-figure: ;--un-numeric-spacing: ;--un-numeric-fraction: ;--un-border-spacing-x:0;--un-border-spacing-y:0;--un-ring-offset-shadow:0 0 rgb(0 0 0 / 0);--un-ring-shadow:0 0 rgb(0 0 0 / 0);--un-shadow-inset: ;--un-shadow:0 0 rgb(0 0 0 / 0);--un-ring-inset: ;--un-ring-offset-width:0px;--un-ring-offset-color:#fff;--un-ring-width:0px;--un-ring-color:rgb(147 197 253 / 0.5);--un-blur: ;--un-brightness: ;--un-contrast: ;--un-drop-shadow: ;--un-grayscale: ;--un-hue-rotate: ;--un-invert: ;--un-saturate: ;--un-sepia: ;--un-backdrop-blur: ;--un-backdrop-brightness: ;--un-backdrop-contrast: ;--un-backdrop-grayscale: ;--un-backdrop-hue-rotate: ;--un-backdrop-invert: ;--un-backdrop-opacity: ;--un-backdrop-saturate: ;--un-backdrop-sepia: ;}
+      /* layer: theme */
+      :root{--un-preset-theme-colors-primary:18 52 86;--un-preset-theme-fontSize-xs-0:1.75rem;--un-preset-theme-fontSize-xs-1:1.75rem;--un-preset-theme-colors-colorKey:red;}
+      .dark{--un-preset-theme-colors-primary:101 67 33;--un-preset-theme-colors-colorKey:blue;}
+      .test{--un-preset-theme-colors-primary:18 49 35;--un-preset-theme-fontSize-xs-0:0.75rem;--un-preset-theme-fontSize-xs-1:1rem;}
+      @media (min-width: 768px){
+      .md\\\\:text-xs{font-size:var(--un-preset-theme-fontSize-xs-0);line-height:var(--un-preset-theme-fontSize-xs-1);}
+      }
+      /* layer: default */
+      .dark .dark\\\\:text-color-key{color:var(--un-preset-theme-colors-colorKey);}
+      @media (min-width: 768px){
+      .md\\\\:text-xs{font-size:var(--un-preset-theme-fontSize-xs-0);line-height:var(--un-preset-theme-fontSize-xs-1);}
+      .md\\\\:text-primary{--un-text-opacity:1;color:rgb(var(--un-preset-theme-colors-primary) / var(--un-text-opacity));}
+      }"
     `)
   })
 })

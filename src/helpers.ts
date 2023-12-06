@@ -24,3 +24,7 @@ export function getThemeVal(theme: any, keys: string[], index = 0) {
   }
   return Array.isArray(theme) ? theme[index] : theme
 }
+
+export function escapeStringRegexp(str: string) {
+  return str.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&').replace(/-/g, '\\x2d')
+}

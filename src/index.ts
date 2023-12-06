@@ -1,7 +1,7 @@
 import type { Preset } from '@unocss/core'
 import { mergeDeep } from '@unocss/core'
 import { parseCssColor } from '@unocss/rule-utils'
-import { getThemeVal, wrapCSSFunction, wrapVar } from './helpers'
+import { escapeStringRegexp, getThemeVal, wrapCSSFunction, wrapVar } from './helpers'
 
 const defaultThemeNames = ['dark', 'light']
 const PRESET_THEME_RULE = 'PRESET_THEME_RULE'
@@ -58,21 +58,26 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
 
           const setThemeValue = (name: string, index = 0, isColor = false) => {
             themeValues.set(name, {
-              theme: keys.reduce((obj, key) => {
-                let themeValue = getThemeVal(theme[key], themeKeys, index) || (key === 'light' ? getThemeVal(originalTheme, themeKeys) : null)
-                if (themeValue) {
-                  if (isColor) {
-                    const cssColor = parseCssColor(themeValue)
-                    if (cssColor?.components)
-                      themeValue = cssColor.components.join(' ')
+              theme: keys.reduce(
+                (obj, key) => {
+                  let themeValue
+                    = getThemeVal(theme[key], themeKeys, index)
+                    || (key === 'light' ? getThemeVal(originalTheme, themeKeys) : null)
+                  if (themeValue) {
+                    if (isColor) {
+                      const cssColor = parseCssColor(themeValue)
+                      if (cssColor?.components)
+                        themeValue = cssColor.components.join(' ')
+                    }
+                    obj[key] = {
+                      [name]: themeValue,
+                    }
                   }
-                  obj[key] = {
-                    [name]: themeValue,
-                  }
-                }
 
-                return obj
-              }, {} as ThemeValue['theme']),
+                  return obj
+                },
+                {} as ThemeValue['theme'],
+              ),
               name,
             })
           }
@@ -102,11 +107,14 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
         return curTheme
       }
 
-      return mergeDeep(originalTheme, recursiveTheme(
-        keys.reduce((obj, key) => {
-          return mergeDeep(obj, theme[key])
-        }, {} as T),
-      ))
+      return mergeDeep(
+        originalTheme,
+        recursiveTheme(
+          keys.reduce((obj, key) => {
+            return mergeDeep(obj, theme[key])
+          }, {} as T),
+        ),
+      )
     },
     rules: [
       [
@@ -150,31 +158,84 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
         async getCSS(context) {
           const { css } = await context.generator.generate(
             // Add Date.now() to avoid cache
-            keys.map(key => `${defaultThemeNames.includes(key) ? `${key}:` : ''}${PRESET_THEME_RULE}:${key}:${Date.now()}`),
+            keys.map(
+              key => `${defaultThemeNames.includes(key) ? `${key}:` : ''}${PRESET_THEME_RULE}:${key}:${Date.now()}`,
+            ),
             { preflights: false },
           )
-          const res = css
+          let inMediaPrefersColorScheme = ''
+          const res: string[] = []
+          css
             .replace(/,\n/g, ',')
             .split('\n')
-            .slice(1).map((line, index, lines) => {
-              const prevLine = index > 0 ? lines[index - 1] : ''
-              if (prevLine.includes('@media')) {
-              // convert .light{} to :root{}
-                line = line.replace(/.*?{/, ':root{')
+            .slice(1)
+            .forEach((line) => {
+              if (line === '@media (prefers-color-scheme: dark){') {
+                inMediaPrefersColorScheme = selectors.dark || '.dark'
+                res.push(line)
+                return
               }
-              else {
-                // convert .light .themename{} to .themename{}
-                line = line.replace(/(\.\w+)+\s([\.\:\w\[\-="\]]+)/g, '$2')
+              if (line === '@media (prefers-color-scheme: light){') {
+                inMediaPrefersColorScheme = selectors.light
+                res.push(line)
+                return
               }
-              return line
-            }).sort((a, b) => {
-              const regexStr = `^${selectors.light}|^@media|^}`
+              if (inMediaPrefersColorScheme && line === '}') {
+                inMediaPrefersColorScheme = ''
+                res[res.length - 1] += line
+                return
+              }
+              if (inMediaPrefersColorScheme) {
+                if (line.startsWith(`${inMediaPrefersColorScheme}{`)) {
+                  res[res.length - 1] += line.replace(`${inMediaPrefersColorScheme}{`, ':root{')
+                  return
+                }
+                return
+              }
+              const regexStr = new RegExp(
+                keys
+                  .map(
+                    key =>
+                      `((.${key}) ((${
+                        selectors[key] ? escapeStringRegexp(selectors[key]) : `.${key}`
+                      }[{|,])|(.${key}\\\\:)))`,
+                  )
+                  .join('|'),
+                'g',
+              )
+              const replacedLine = line.replace(regexStr, (matchStr, ...params) => {
+                const matchGroup = params.slice(0, -2)
+                let replacement = ''
+                for (let i = 0; i < matchGroup.length / 5; i++) {
+                  const startIndex = i * 5
+                  if (!matchGroup[startIndex])
+                    continue
+                  if (matchGroup[startIndex + 3]) {
+                    // ".light .lightclass" => ".lightclass"
+                    // ".dark [data-theme="dark"]" => "[data-theme="dark"]"
+                    replacement = matchGroup[startIndex + 3]
+                  }
+                  else {
+                    // ".light .light\\:" => ".lightclass .light\\:"
+                    // ".dark .dark\\:" => "[data-theme="dark"] .dark\\:"
+                    const key = matchGroup[startIndex + 1].substring(1)
+                    replacement = `${selectors[key]} ${matchGroup[startIndex + 2]}`
+                  }
+                  break
+                }
+                return replacement
+              })
+              res.push(replacedLine)
+            })
+
+          return res
+            .sort((a, b) => {
+              const regexStr = `^${selectors.light}|^@media \\(prefers-color-scheme:`
               if (a.match(regexStr)?.length)
                 return b.match(regexStr)?.length ? 0 : -1
               return 1
-            }).join('\n')
-
-          return res
+            })
+            .join('\n')
         },
       },
     ],
