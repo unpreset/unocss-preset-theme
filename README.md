@@ -88,6 +88,12 @@ Customize the selectors of the generated css variables `{ light: ':root', [theme
 - [playground](./examples/playground/)
 - [media](./examples/media/)
 
+## Contributors
+
+<a href="https://github.com/unpreset/unocss-preset-theme/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=unpreset/unocss-preset-theme" />
+</a>
+
 ## License
 
 MIT License
