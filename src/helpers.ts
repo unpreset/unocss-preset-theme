@@ -1,5 +1,5 @@
-export function wrapVar(name: string) {
-  return `var(${name})`
+export function wrapVar(name: string, fallback?: string) {
+  return fallback ? `var(${name}, ${fallback})` : `var(${name})`
 }
 
 export function wrapRGBA(v: string, alpha?: string | number) {

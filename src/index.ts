@@ -70,15 +70,20 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
                   let themeValue
                     = getThemeVal(theme[key], themeKeys, index)
                     || (key === originalThemeKey ? getThemeVal(originalTheme, themeKeys) : null)
+                  let themeAlphaValue: string | undefined
                   if (themeValue) {
                     if (isColor) {
                       const cssColor = parseCssColor(themeValue)
+                      if (cssColor?.alpha !== undefined && cssColor?.alpha !== null)
+                        themeAlphaValue = `${cssColor.alpha}`
                       if (cssColor?.components)
                         themeValue = cssColor.components.join(' ')
                     }
                     obj[key] = {
                       [name]: themeValue,
                     }
+                    if (themeAlphaValue !== undefined)
+                      obj[key][`${name}--alpha`] = themeAlphaValue
                   }
 
                   return obj
@@ -104,7 +109,7 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
             if (isColor) {
               const cssColor = parseCssColor(val) || val
               if (typeof cssColor !== 'string')
-                curTheme[key] = wrapCSSFunction(cssColor.type, curTheme[key], cssColor?.alpha)
+                curTheme[key] = wrapCSSFunction(cssColor.type, curTheme[key], wrapVar(`${name}--alpha`, '1'))
             }
           }
           else {
