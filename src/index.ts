@@ -41,8 +41,15 @@ interface ThemeValue {
 export function presetTheme<T extends Record<string, any>>(options: PresetThemeOptions<T>): Preset<T> {
   const { prefix = '--un-preset-theme', theme } = options
   const selectors: Selectors = { light: ':root', ...options.selectors }
-  if (!theme.light)
+  let originalThemeKey: 'dark' | 'light' = 'light'
+  if (!theme.dark) {
+    theme.dark = {} as T
+    originalThemeKey = 'dark'
+  }
+  if (!theme.light) {
     theme.light = {} as T
+    originalThemeKey = 'light'
+  }
   const keys = Object.keys(theme)
   const varsRE = new RegExp(`var\\((${prefix}[\\w-]*)\\)`)
   const themeValues = new Map<string, ThemeValue>()
@@ -62,7 +69,7 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
                 (obj, key) => {
                   let themeValue
                     = getThemeVal(theme[key], themeKeys, index)
-                    || (key === 'light' ? getThemeVal(originalTheme, themeKeys) : null)
+                    || (key === originalThemeKey ? getThemeVal(originalTheme, themeKeys) : null)
                   if (themeValue) {
                     if (isColor) {
                       const cssColor = parseCssColor(themeValue)
@@ -230,7 +237,7 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
 
           return res
             .sort((a, b) => {
-              const regexStr = `^${selectors.light}|^@media \\(prefers-color-scheme:`
+              const regexStr = `^${selectors[originalThemeKey]}|^@media \\(prefers-color-scheme:`
               if (a.match(regexStr)?.length)
                 return b.match(regexStr)?.length ? 0 : -1
               return 1
