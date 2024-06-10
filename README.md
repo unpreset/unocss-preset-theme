@@ -85,7 +85,7 @@ Customize the selectors of the generated css variables `{ light: ':root', [theme
 
 ## Examples
 
-- [playground](./examples/playground/)
+- [playground](./playground/)
 - [media](./examples/media/)
 
 ## Contributors
