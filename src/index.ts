@@ -152,7 +152,7 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
             return {
               matcher,
               selector(input) {
-                const themeName = input.match(/\:([\w-]+)\\\:\d+/)![1]
+                const themeName = input.match(/:([\w-]+)\\:\d+/)![1]
                 return selectors[themeName] || `.${themeName}`
               },
             }

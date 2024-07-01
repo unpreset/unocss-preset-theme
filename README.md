@@ -10,7 +10,6 @@ This preset will help you easily make dynamic theme switching. Inspired by [here
 npm i -D unocss-preset-theme
 ```
 
-
 ## Usages
 
 Usually you just need to set your `light theme` to `unocss` and your `dark theme` to `presetTheme`. This preset will transform your provide theme into css variables, then you just need to set the `dark` class or `compact` class (Depends on your theme name) in your html and you're done.
@@ -81,7 +80,6 @@ Your different theme. like `{ dark: {}, other: {} }`
 ### selectors
 
 Customize the selectors of the generated css variables `{ light: ':root', [themeName]: '.[themeName]' }`
-
 
 ## Examples
 
