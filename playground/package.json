@@ -9,15 +9,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@unocss/reset": "^0.58.0",
-    "vue": "^3.3.10"
+    "@unocss/reset": "^0.61.0",
+    "vue": "^3.4.31"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^4.5.1",
-    "typescript": "^5.3.2",
-    "unocss": "^0.58.0",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "typescript": "^5.5.2",
+    "unocss": "^0.61.0",
     "unocss-preset-theme": "workspace:*",
-    "vite": "^5.0.5",
-    "vue-tsc": "^1.8.25"
+    "vite": "^5.3.2",
+    "vue-tsc": "^2.0.24"
   }
 }
