@@ -51,7 +51,7 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
     originalThemeKey = 'light'
   }
   const keys = Object.keys(theme)
-  const varsRE = new RegExp(`var\\((${prefix}[\\w-]*)\\)`)
+  const varsRE = new RegExp(`var\\((${escapeStringRegexp(prefix)}[\\w-]*)\\)`)
   const themeValues = new Map<string, ThemeValue>()
   const usedTheme: Array<ThemeValue> = []
 
@@ -59,31 +59,47 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
     name: 'unocss-preset-theme',
     extendTheme(originalTheme) {
       const recursiveTheme = (curTheme: Record<string, any>, preKeys: string[] = []) => {
-        Object.keys(curTheme).forEach((key) => {
-          const val = Reflect.get(curTheme, key)
-          const themeKeys = preKeys.concat(key)
+        Object.keys(curTheme).forEach((configKey) => {
+          const val = Reflect.get(curTheme, configKey)
+          const themeKeys = preKeys.concat(configKey)
 
           const setThemeValue = (name: string, index = 0, isColor = false) => {
             themeValues.set(name, {
               theme: keys.reduce(
-                (obj, key) => {
+                (obj, themeKey) => {
                   let themeValue
-                    = getThemeVal(theme[key], themeKeys, index)
-                    || (key === originalThemeKey ? getThemeVal(originalTheme, themeKeys) : null)
+                    = getThemeVal(theme[themeKey], themeKeys, index)
+                    || (themeKey === originalThemeKey ? getThemeVal(originalTheme, themeKeys) : null)
                   let themeAlphaValue: string | undefined
                   if (themeValue) {
                     if (isColor) {
                       const cssColor = parseCssColor(themeValue)
-                      if (cssColor?.alpha !== undefined && cssColor?.alpha !== null)
-                        themeAlphaValue = `${cssColor.alpha}`
-                      if (cssColor?.components)
-                        themeValue = cssColor.components.join(' ')
+                      if (cssColor?.alpha !== undefined && cssColor?.alpha !== null) {
+                        if (new RegExp(`var\\((${escapeStringRegexp(`${prefix}-${preKeys.join('-')}-${configKey}--alpha`)}), 1\\)`).test(cssColor.alpha.toString())) {
+                          const values = themeValues.get(name)
+                          if (values)
+                            themeAlphaValue = values.theme[themeKey][`${name}--alpha`]
+                        }
+                        else {
+                          themeAlphaValue = `${cssColor.alpha}`
+                        }
+                      }
+                      if (cssColor?.components) {
+                        if (cssColor.components.length === 1 && new RegExp(`var\\((${escapeStringRegexp(`${prefix}-${preKeys.join('-')}-${configKey}`)})\\)`).test(cssColor.components[0].toString())) {
+                          const values = themeValues.get(name)
+                          if (values)
+                            themeValue = values.theme[themeKey][name]
+                        }
+                        else {
+                          themeValue = cssColor.components.join(' ')
+                        }
+                      }
                     }
-                    obj[key] = {
+                    obj[themeKey] = {
                       [name]: themeValue,
                     }
                     if (themeAlphaValue !== undefined)
-                      obj[key][`${name}--alpha`] = themeAlphaValue
+                      obj[themeKey][`${name}--alpha`] = themeAlphaValue
                   }
 
                   return obj
@@ -105,11 +121,11 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
             const name = [prefix, ...themeKeys].join('-')
             const isColor = themeKeys[0] === 'colors'
             setThemeValue(name, 0, isColor)
-            curTheme[key] = wrapVar(name)
+            curTheme[configKey] = wrapVar(name)
             if (isColor) {
               const cssColor = parseCssColor(val) || val
               if (typeof cssColor !== 'string')
-                curTheme[key] = wrapCSSFunction(cssColor.type, curTheme[key], wrapVar(`${name}--alpha`, '1'))
+                curTheme[configKey] = wrapCSSFunction(cssColor.type, curTheme[configKey], wrapVar(`${name}--alpha`, '1'))
             }
           }
           else {
