@@ -37,7 +37,7 @@
   "scripts": {
     "build": "unbuild",
     "stub": "unbuild --stub",
-    "play": "pnpm --filter ./playground run dev",
+    "play": "pnpm -C ./playground run dev",
     "test": "vitest",
     "lint": "eslint .",
     "lint:fix": "pnpm run lint --fix",
@@ -48,13 +48,13 @@
     "@unocss/core": ">= 0.52.0"
   },
   "dependencies": {
-    "@unocss/core": "^0.61.0",
-    "@unocss/rule-utils": "^0.61.0"
+    "@unocss/core": "^0.63.4",
+    "@unocss/rule-utils": "^0.63.4"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.21.2",
     "@types/node": "^20.14.9",
-    "@unocss/preset-uno": "^0.61.0",
+    "@unocss/preset-uno": "^0.63.4",
     "bumpp": "^9.4.1",
     "eslint": "^9.6.0",
     "typescript": "^5.5.2",
