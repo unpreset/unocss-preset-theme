@@ -78,7 +78,7 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
                       if (cssColor?.alpha !== undefined && cssColor?.alpha !== null) {
                         if (`var(${cssVarName}--alpha, 1)` === cssColor.alpha) {
                           const values = themeValues.get(name)
-                          if (values)
+                          if (values?.theme[themeKey][`${name}--alpha`])
                             themeAlphaValue = values.theme[themeKey][`${name}--alpha`]
                         }
                         else {
@@ -88,7 +88,7 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
                       if (cssColor?.components) {
                         if (cssColor.components.length === 1 && `var(${cssVarName})` === cssColor.components[0]) {
                           const values = themeValues.get(name)
-                          if (values)
+                          if (values?.theme[themeKey][name])
                             themeValue = values.theme[themeKey][name]
                         }
                         else {
@@ -99,7 +99,7 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
                     else {
                       if (`var(${cssVarName})` === themeValue) {
                         const values = themeValues.get(name)
-                        if (values) {
+                        if (values?.theme[themeKey][name]) {
                           themeValue = values.theme[themeKey][name]
                         }
                       }
