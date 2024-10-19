@@ -8,7 +8,7 @@ describe('build', () => {
     const output = spawnSync('pnpm', ['-C', 'playground', 'build'], { shell: true, encoding: 'utf8' })
     expect(output.status).toBe(0)
     expect(output.error).toBeUndefined()
-    expect(output.stdout).toMatch(/✓ built in \d+m?s/)
+    expect(output.stdout).toMatch(/✓ built in (\d+\.)?\d+m?s/)
 
     const dir = resolve(import.meta.dirname, '../dist/assets')
     const assets = readdirSync(dir)
