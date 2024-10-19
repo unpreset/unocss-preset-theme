@@ -72,10 +72,11 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
                     || (themeKey === originalThemeKey ? getThemeVal(originalTheme, themeKeys) : null)
                   let themeAlphaValue: string | undefined
                   if (themeValue) {
+                    const cssVarName = `${prefix}-${preKeys.join('-')}-${configKey}`
                     if (isColor) {
                       const cssColor = parseCssColor(themeValue)
                       if (cssColor?.alpha !== undefined && cssColor?.alpha !== null) {
-                        if (new RegExp(`var\\(${escapeStringRegexp(`${prefix}-${preKeys.join('-')}-${configKey}--alpha`)}, 1\\)`).test(cssColor.alpha.toString())) {
+                        if (`var(${cssVarName}--alpha, 1)` === cssColor.alpha) {
                           const values = themeValues.get(name)
                           if (values)
                             themeAlphaValue = values.theme[themeKey][`${name}--alpha`]
@@ -85,7 +86,7 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
                         }
                       }
                       if (cssColor?.components) {
-                        if (cssColor.components.length === 1 && new RegExp(`var\\(${escapeStringRegexp(`${prefix}-${preKeys.join('-')}-${configKey}`)}\\)`).test(cssColor.components[0].toString())) {
+                        if (cssColor.components.length === 1 && `var(${cssVarName})` === cssColor.components[0]) {
                           const values = themeValues.get(name)
                           if (values)
                             themeValue = values.theme[themeKey][name]
@@ -96,7 +97,7 @@ export function presetTheme<T extends Record<string, any>>(options: PresetThemeO
                       }
                     }
                     else {
-                      if (new RegExp(`var\\(${escapeStringRegexp(`${prefix}-${preKeys.join('-')}-${configKey}`)}\\)`).test(themeValue)) {
+                      if (`var(${cssVarName})` === themeValue) {
                         const values = themeValues.get(name)
                         if (values) {
                           themeValue = values.theme[themeKey][name]
