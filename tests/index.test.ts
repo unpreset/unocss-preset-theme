@@ -1,9 +1,9 @@
 import type { UserConfig } from '@unocss/core'
+import type { PresetUnoOptions, Theme } from '@unocss/preset-uno'
+import type { PresetThemeOptions } from '../src'
 import { createGenerator, mergeDeep } from '@unocss/core'
 import { presetUno } from '@unocss/preset-uno'
-import type { PresetUnoOptions, Theme } from '@unocss/preset-uno'
 import { describe, expect, it } from 'vitest'
-import type { PresetThemeOptions } from '../src'
 import presetTheme from '../src'
 
 describe('theme', () => {

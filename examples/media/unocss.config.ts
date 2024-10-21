@@ -1,6 +1,6 @@
+import type { Theme } from 'unocss/preset-uno'
 import { defineConfig, presetIcons, presetUno } from 'unocss'
 import presetTheme from 'unocss-preset-theme'
-import type { Theme } from 'unocss/preset-uno'
 
 export default defineConfig<Theme>({
   theme: {

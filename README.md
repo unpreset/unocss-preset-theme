@@ -17,9 +17,9 @@ Usually you just need to set your `light theme` to `unocss` and your `dark theme
 Just like this
 
 ```typescript
-import Unocss from 'unocss/vite'
 import type { Theme } from 'unocss/preset-uno'
 import { presetUno } from 'unocss'
+import Unocss from 'unocss/vite'
 import presetTheme from 'unocss-preset-theme'
 
 Unocss<Theme>({
