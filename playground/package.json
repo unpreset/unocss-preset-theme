@@ -10,14 +10,14 @@
   },
   "dependencies": {
     "@unocss/reset": "^0.63.4",
-    "vue": "^3.4.31"
+    "vue": "^3.5.12"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.0.5",
-    "typescript": "^5.5.2",
+    "@vitejs/plugin-vue": "^5.1.4",
+    "typescript": "^5.6.3",
     "unocss": "^0.63.4",
     "unocss-preset-theme": "workspace:*",
-    "vite": "^5.3.2",
-    "vue-tsc": "^2.0.24"
+    "vite": "^5.4.9",
+    "vue-tsc": "^2.1.6"
   }
 }

@@ -2,7 +2,7 @@
   "name": "unocss-preset-theme",
   "type": "module",
   "version": "0.13.0",
-  "packageManager": "pnpm@9.4.0",
+  "packageManager": "pnpm@9.12.2",
   "description": "dynamic theme",
   "author": "Dunqing <dengqing0821@gmail.com>",
   "license": "MIT",
@@ -52,13 +52,13 @@
     "@unocss/rule-utils": "^0.63.4"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.21.2",
-    "@types/node": "^20.14.9",
+    "@antfu/eslint-config": "^3.8.0",
+    "@types/node": "^22.7.7",
     "@unocss/preset-uno": "^0.63.4",
-    "bumpp": "^9.4.1",
-    "eslint": "^9.6.0",
-    "typescript": "^5.5.2",
+    "bumpp": "^9.7.1",
+    "eslint": "^9.13.0",
+    "typescript": "^5.6.3",
     "unbuild": "^2.0.0",
-    "vitest": "^1.6.0"
+    "vitest": "^2.1.3"
   }
 }
