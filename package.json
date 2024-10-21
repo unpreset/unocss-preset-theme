@@ -1,7 +1,7 @@
 {
   "name": "unocss-preset-theme",
   "type": "module",
-  "version": "0.14.0",
+  "version": "0.14.1",
   "packageManager": "pnpm@9.12.2",
   "description": "dynamic theme",
   "author": "Dunqing <dengqing0821@gmail.com>",
